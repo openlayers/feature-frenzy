@@ -317,44 +317,7 @@ const layer = new VectorTileLayer({
 
   <!-- Andreas -->
   <div>
-    <h1>map canvas drawing</h1>
-    <pre><code>
-  map.on('postcompose', function(event) {
-    const context = event.context;
-    context.font = '30px Arial';
-    context.fillText(
-      '© 2018 OpenLayers',
-      10, context.canvas.height - 20
-    );
-  });
-        </code></pre>
-  </div>
-  <div>
-    <h1>map canvas drawing
-      <br>(high level 💭)</h1>
-    <pre><code>
-map.on('postcompose', function(event) {
-  const vectorContext = event.vectorContext;
-  const center = event.frameState.viewState.center;
-  vectorContext.setStyle(pointStyle);
-  vectorContext.drawGeometry(new Point(center));
-});
-    </code></pre>
-  </div>
-  <div>
-    <h1>canvas drawing
-      <br>(high level)</h1>
-    <pre><code>
-  import {toContext} from 'ol/render';
-  
-  const vectorContext = toContext(canvasElement);
-  vectorContext.setStyle(pointStyle);
-  vectorContext.drawGeometry(new Point([15, 15]));
-      </code></pre>
-  </div>
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./magnify.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+    <h1>TODO: WebGL Points</h1>
   </div>
 
   <!-- Tim -->
@@ -396,25 +359,6 @@ const layer = new TileLayer({
 
   <div>
     <h1>WebGL Tiles
-      <br>(style expressions)</h1>
-    <pre><code>
-const layer = new TileLayer({
-  source: new GeoTIFF(options),
-  style: {
-    color: [
-      'interpolate', ['linear'], ndvi,
-      -1,
-      'rgb(100, 100, 100)',
-      1,
-      'rgb(0, 69, 0)'
-    ],
-  }
-})
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>WebGL Tiles
       <br>(variables)</h1>
     <pre><code>
 const style = {
@@ -449,22 +393,7 @@ slider.addEventListener('input', () => {
   </div>
 
   <div>
-    <h1>es modules</h1>
-    <div>
-      <p>✓ works with webpack</p>
-      <p>✓ works with parcel</p>
-      <p>✓ works with rollup</p>
-      <p>✓ #0CJS FTW!</p>
-    </div>
-  </div>
-
-  <div>
-    <h1>what's next?</h1>
-    <div>
-      <p>☐ documentation</p>
-      <p>☐ website</p>
-      <p>☐ ship it 🚢</p>
-    </div>
+    <h1>TODO: DX</h1>
   </div>
 
   <div data-bodyclass="bright">
