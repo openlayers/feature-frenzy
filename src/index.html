@@ -132,6 +132,57 @@ const source = new XYZSource({
 
   <!-- Tim -->
   <div>
+    <h1>geotiff sources</h1>
+    <pre><code>
+import GeoTIFF from 'ol/source/GeoTIFF';
+
+const source = new GeoTIFF({
+  sources: [{url: 'https://example.com/world.tif'}]
+});
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>geotiff sources</h1>
+    <pre><code>
+import GeoTIFF from 'ol/source/GeoTIFF';
+
+const source = new GeoTIFF({
+  sources: [
+    {url: 'https://example.com/B08.tif'},
+    {url: 'https://example.com/B04.tif'},
+    {url: 'https://example.com/B02.tif'},
+  ]
+});
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./cog-viewer.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <div>
+    <h1>resolving views</h1>
+    <pre><code>
+import GeoTIFF from 'ol/source/GeoTIFF';
+
+const source = new GeoTIFF(options);
+
+const map = new Map({
+  target: 'container',
+  layers: [new TileLayer({source})],
+  view: source.getView(),
+});
+    </code></pre>
+  </div>
+
+  <!-- Andreas -->
+  <div>
+    <h1>feature interaction</h1>
+  </div>
+
+  <!-- Tim -->
+  <div>
     <h1>feature editing</h1>
     <pre><code>
 import {Draw, Modify, Snap} from 'ol/interaction';
@@ -241,21 +292,7 @@ apply('map', 'https://free.tilehosting.com/' +
 
   <!-- Tim -->
   <div>
-    <h1>raster operations</h1>
-    <pre><code>
-import {Raster} from 'ol/source';
-
-const source = new Raster({
-  sources: [elevation, landcover],
-  operation: function(pixels, data) {
-    // do whatever you want here
-  }
-});
-    </code></pre>
-  </div>
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./raster.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+    <h1>OGC Tiles</h1>
   </div>
 
   <!-- Andreas -->
