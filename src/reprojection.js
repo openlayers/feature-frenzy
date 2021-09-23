@@ -85,13 +85,12 @@ const view3128 = new View({
   projection: proj,
   maxResolution: view3857.getResolutionForZoom(4),
   extent: [-964261.03, 6509913.55, 784650.11, 9827663.99],
+  constrainOnlyCenter: true,
 });
 document.getElementById('epsg3182').addEventListener('click', function () {
   if (map.getView() !== view3128) {
     vectorLayer.setSource(vector3128);
-    view3128.setResolution(
-      view3128.constrainResolution(view3857.getResolution() / resolutionFactor)
-    );
+    view3128.setResolution(view3857.getResolution() / resolutionFactor);
     view3128.setCenter(transform(view3857.getCenter(), 'EPSG:3857', proj));
     view3128.setRotation(view3857.getRotation());
     map.setView(view3128);
