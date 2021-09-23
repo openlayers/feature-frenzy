@@ -93,22 +93,33 @@ map.on('click', () => {
     view.animate(
       {
         center: tour[index].center,
-        duration: duration,
+        duration: index === 0 ? duration / 2 : duration,
       },
       callback
     );
 
-    view.animate(
-      {
-        zoom: minZoom,
-        duration: duration / 2,
-      },
-      {
-        zoom: maxZoom,
-        duration: duration / 2,
-      },
-      callback
-    );
+    let zooms;
+    if (index === 0) {
+      zooms = [
+        {
+          zoom: maxZoom,
+          duration: duration / 2,
+        },
+      ];
+    } else {
+      zooms = [
+        {
+          zoom: minZoom,
+          duration: duration / 2,
+        },
+        {
+          zoom: maxZoom,
+          duration: duration / 2,
+        },
+      ];
+    }
+
+    view.animate(...zooms, callback);
   }
   step();
 });
