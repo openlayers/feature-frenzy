@@ -24,7 +24,8 @@
     "drag-drop": "^7.2.0",
     "mproj": "^0.0.34",
     "ol": "^6.7.1-dev.1632429561739",
-    "ol-hashed": "^2.1.0"
+    "ol-hashed": "^2.1.0",
+    "ol-mapbox-style": "^6.5.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
