@@ -18,6 +18,8 @@ const seoul = {center: [126.978, 37.5665], year: 2015};
 const bonn = {center: [7.0982, 50.7374], year: 2016};
 const boston = {center: [-71.0589, 42.3601], year: 2017};
 const daressalaam = {center: [39.2083, -6.7924], year: 2018};
+const bucharest = {center: [26.1025, 44.4268], year: 2019};
+const buenosaires = {center: [-58.3816, -34.6037], year: 2021};
 
 const duration = 3500;
 const minZoom = 4;
@@ -37,6 +39,8 @@ const tour = [
   bonn,
   boston,
   daressalaam,
+  bucharest,
+  buenosaires,
 ].map((location) => ({
   center: fromLonLat(location.center),
   year: location.year,
