@@ -49,7 +49,7 @@
 
   <div data-bodyclass="bright center">
     <p>OpenLayers</p>
-    <small>feature frenzy</small>
+    <small>Feature Frenzy</small>
   </div>
   <div data-bodyclass="bright center">
     <p>andreas@ahocevar.com</p>
@@ -69,7 +69,7 @@
 
   <!-- Tim -->
   <div>
-    <h1>view animation</h1>
+    <h1>View Animation</h1>
     <pre><code>
 view.animate({
   duration: 1500,
@@ -80,7 +80,7 @@ view.animate({
     </code></pre>
   </div>
   <div>
-    <h1>animation chaining ⛓</h1>
+    <h1>Animation Chaining ⛓</h1>
     <pre><code>
 view.animate({
   center: london,
@@ -132,7 +132,7 @@ const source = new XYZSource({
 
   <!-- Tim -->
   <div>
-    <h1>geotiff sources</h1>
+    <h1>GeoTIFF Sources</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -143,7 +143,7 @@ const source = new GeoTIFF({
   </div>
 
   <div>
-    <h1>geotiff sources</h1>
+    <h1>GeoTIFF Sources</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -162,7 +162,7 @@ const source = new GeoTIFF({
   </div>
 
   <div>
-    <h1>resolving views</h1>
+    <h1>Resolving Views</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -178,12 +178,12 @@ const map = new Map({
 
   <!-- Andreas -->
   <div>
-    <h1>TODO: feature interaction</h1>
+    <h1>TODO: Feature Interaction</h1>
   </div>
 
   <!-- Tim -->
   <div>
-    <h1>feature editing</h1>
+    <h1>Feature Editing</h1>
     <pre><code>
 import {Draw, Modify, Snap} from 'ol/interaction';
 
@@ -193,40 +193,30 @@ map.addInteraction(
     </code></pre>
   </div>
 
+  <div>
+    <h1>Feature Editing</h1>
+    <pre><code>
+import {Draw, Modify, Snap} from 'ol/interaction';
+
+map.addInteraction(
+  new Modify({source: source})
+);
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>Feature Editing</h1>
+    <pre><code>
+import {Draw, Modify, Snap} from 'ol/interaction';
+
+map.addInteraction(
+  new Snap({source: source})
+);
+    </code></pre>
+  </div>
+
   <div style="width: 100%; height: 100%;">
     <iframe src="./feature-editor.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
-  </div>
-
-  <div>
-    <h1>feature style</h1>
-    <pre><code>
-import {Style, Fill, Stroke} from 'ol/style';
-
-layer.setStyle(new Style({
-  stroke: new Stroke({
-    color: 'white'
-  }),
-  fill: new Fill({
-    color: [255, 153, 0, 0.5]
-  })
-}));
-    </code></pre>
-  </div>
-  <div>
-    <h1>feature style
-      <br>(dynamic 💥)</h1>
-    <pre><code>
-layer.setStyle(function(feature, resolution) {
-  if (feature.get('type') == 'special') {
-    return specialStyle;
-  }
-  return otherStyle;
-});
-    </code></pre>
-  </div>
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./feature-style.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
   </div>
 
   <!-- Andreas -->
