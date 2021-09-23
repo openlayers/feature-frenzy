@@ -178,7 +178,7 @@ const map = new Map({
 
   <!-- Andreas -->
   <div>
-    <h1>feature interaction</h1>
+    <h1>TODO: feature interaction</h1>
   </div>
 
   <!-- Tim -->
@@ -287,7 +287,7 @@ olms('map', 'https://api.maptiler.com/maps/bright/style.json');
 
   <!-- Tim -->
   <div>
-    <h1>OGC Tiles</h1>
+    <h1>TODO: OGC Tiles</h1>
   </div>
 
   <!-- Andreas -->
@@ -330,6 +330,97 @@ map.on('postcompose', function(event) {
 
   <div style="width: 100%; height: 100%;">
     <iframe src="./magnify.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <!-- Tim -->
+  <div>
+    <h1>WebGL Tiles
+      <br>(band math)</h1>
+    <pre><code>
+const red = ['band', 3];
+const nir = ['band', 4];
+const diff = ['-', nir, red];
+const sum = ['+', nir, red];
+
+const ndvi = ['/', diff, sum];
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>WebGL Tiles
+      <br>(style expressions)</h1>
+    <pre><code>
+const layer = new TileLayer({
+  source: new GeoTIFF(options),
+  style: {
+    color: [
+      'interpolate', ['linear'], ndvi,
+      -1,
+      'rgb(100, 100, 100)',
+      1,
+      'rgb(0, 69, 0)'
+    ],
+  }
+})
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./ndvi.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <div>
+    <h1>WebGL Tiles
+      <br>(style expressions)</h1>
+    <pre><code>
+const layer = new TileLayer({
+  source: new GeoTIFF(options),
+  style: {
+    color: [
+      'interpolate', ['linear'], ndvi,
+      -1,
+      'rgb(100, 100, 100)',
+      1,
+      'rgb(0, 69, 0)'
+    ],
+  }
+})
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>WebGL Tiles
+      <br>(variables)</h1>
+    <pre><code>
+const style = {
+  variables: {
+    seaLevel: 0,
+  },
+  color: [
+    'interpolate', ['linear'], elevation,
+    ['var', 'seaLevel'],
+    [139, 212, 255, 1],
+    ['+', 0.01, ['var', 'seaLevel']],
+    [139, 212, 255, 0],
+  ],
+}
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>WebGL Tiles
+      <br>(variables)</h1>
+    <pre><code>
+slider.addEventListener('input', () => {
+  layer.updateStyleVariables({
+    seaLevel: parseFloat(slider.value)
+  });
+});
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./sea-level.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
   </div>
 
   <div>

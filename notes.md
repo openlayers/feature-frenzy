@@ -9,7 +9,7 @@
  * Vector tiles (A)
  * OGC Tiles (T)
  * WebGL points (A)
- * Data tiles (T)
+ * WebGL tiles (T)
  * Dev experience (A)
 
  * Thanks (sponsoring)
