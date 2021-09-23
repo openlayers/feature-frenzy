@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>vector tiles</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    #overlay {
+      font-size: 1em;
+      color: white;
+      background-color: black;
+      opacity: 0.6;
+      padding: 3px;
+      cursor: not-allowed;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="map-container"></div>
+    <div id="output">
+      <a id="clutter">clutter</a>
+      <a id="declutter">declutter</a>
+      <a target="_blank" href="https://maputnik.github.io/editor/">edit</a>
+    </div>
+    <div id="overlay"></div>;
+    <script type="module" src="vector-tiles.js"></script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <title>OpenLayers reprojection</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #map {
+      background-color: rgb(158, 179, 202);
+    }
+    #output {
+      color: white;
+      -webkit-text-stroke: 0.5px gray
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div id="output">
+    <a id="epsg3857">Web Mercator</a>
+    <a id="epsg3182">UTM Zone 22N</a>
+  </div>
+  <script type="module" src="reprojection.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Big</title>
+  <link href="big/big.css" rel="stylesheet" type="text/css" />
+  <link href="big/highlight.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .bright {
+      background: #FDCC32;
+    }
+
+    .block {
+      display: block;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .slide-container {
+      justify-content: center;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    div.slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+  <script type="module" src="show.js"></script>
+</head>
+
+<body class="light">
+
+  <div data-bodyclass="bright center">
+    <p>OpenLayers</p>
+    <small>feature frenzy</small>
+  </div>
+  <div data-bodyclass="bright center">
+    <p>ahocevar@boundlessgeo.com</p>
+    <br>
+    <p>tim@planet.com</p>
+  </div>
+
+  <div data-bodyclass="bright center">
+    <h1>OpenLayers 5
+      <br>is coming</h1>
+    <br>
+    <div>
+      <code>npm install ol@beta</code>
+    </div>
+    <br>
+    <p>What's new? What's cool? 🎉</p>
+  </div>
+
+  <!-- Tim -->
+  <div>
+    <h1>view animation</h1>
+    <pre><code>
+view.animate({
+  duration: 1500,
+  center: fromLonLat([-110, 45]),
+  rotation: Math.PI / 4,
+  zoom: 12
+})
+    </code></pre>
+  </div>
+  <div>
+    <h1>animation chaining ⛓</h1>
+    <pre><code>
+view.animate({
+  center: london,
+  easing: easeIn
+}, {
+  center: rome,
+  easing: easeOut
+}, function() {
+  // all done
+});
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./view-animation.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <!-- Andreas -->
+  <div>
+    <h1>reprojection</h1>
+    <pre><code>
+const view = new View({
+  projection: custom
+});
+
+const source = new VectorSource({
+  url: 'http://example.com/world.json',
+  format: new GeoJSON()
+});
+    </code></pre>
+  </div>
+  <div>
+    <h1>reprojection
+      <br>(raster too 💪)</h1>
+    <pre><code>
+const view = new View({
+  projection: custom
+});
+
+const source = new XYZSource({
+  projection: mercator
+});
+    </code></pre>
+  </div>
+  
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./reprojection.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <!-- Tim -->
+  <div>
+    <h1>feature editing</h1>
+    <pre><code>
+import {Draw, Modify, Snap} from 'ol/interaction';
+
+map.addInteraction(
+  new Draw({type: 'Polygon', source: source})
+);
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./feature-editor.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <div>
+    <h1>feature style</h1>
+    <pre><code>
+import {Style, Fill, Stroke} from 'ol/style';
+
+layer.setStyle(new Style({
+  stroke: new Stroke({
+    color: 'white'
+  }),
+  fill: new Fill({
+    color: [255, 153, 0, 0.5]
+  })
+}));
+    </code></pre>
+  </div>
+  <div>
+    <h1>feature style
+      <br>(dynamic 💥)</h1>
+    <pre><code>
+layer.setStyle(function(feature, resolution) {
+  if (feature.get('type') == 'special') {
+    return specialStyle;
+  }
+  return otherStyle;
+});
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./feature-style.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <!-- Andreas -->
+  <div>
+    <h1>vector tiles</h1>
+    <pre><code>
+import VectorTileLayer from 'ol/layer/VectorTile';
+import VectorTile from 'ol/source/VectorTile';
+import MVT from 'ol/format/MVT';
+
+const vt = new VectorTileLayer({
+  source: new VectorTile({
+    format: new MVT(),
+    url: 'https://free.tilehosting.com/data/v3/' +
+        '{z}/{x}/{y}.pbf.pict'
+  })
+});
+    </code></pre>
+  </div>
+  <div>
+    <h1>decluttered labels
+      <br>and symbols</h1>
+    <pre><code>
+import {VectorTileLayer, VectorLayer} from 'ol/layer';
+
+const vt = new VectorTileLayer({
+  declutter: true
+});
+
+const vector = new VectorLayer({
+  declutter: true
+});
+    </code></pre>
+  </div>
+  <div>
+    <h1>labels along lines</h1>
+    <pre><code>
+import Text from 'ol/style/Text';
+
+layer.setStyle(function(feature) {
+  style.setText(new Text({
+    placement: 'line',
+    text: feature.get('name')
+  }));
+  return style;
+});
+    </code></pre>
+  </div>
+  <div>
+    <h1>vector tiles
+      <br>(mapbox style 😲)</h1>
+    <pre><code>
+import {apply} from 'ol-mapbox-style';
+
+apply('map', 'https://free.tilehosting.com/' +
+    'styles/bright/style.json');
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./vector-tiles.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <!-- Tim -->
+  <div>
+    <h1>raster operations</h1>
+    <pre><code>
+import {Raster} from 'ol/source';
+
+const source = new Raster({
+  sources: [elevation, landcover],
+  operation: function(pixels, data) {
+    // do whatever you want here
+  }
+});
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./raster.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <!-- Andreas -->
+  <div>
+    <h1>map canvas drawing</h1>
+    <pre><code>
+  map.on('postcompose', function(event) {
+    const context = event.context;
+    context.font = '30px Arial';
+    context.fillText(
+      '© 2018 OpenLayers',
+      10, context.canvas.height - 20
+    );
+  });
+        </code></pre>
+  </div>
+  <div>
+    <h1>map canvas drawing
+      <br>(high level 💭)</h1>
+    <pre><code>
+map.on('postcompose', function(event) {
+  const vectorContext = event.vectorContext;
+  const center = event.frameState.viewState.center;
+  vectorContext.setStyle(pointStyle);
+  vectorContext.drawGeometry(new Point(center));
+});
+    </code></pre>
+  </div>
+  <div>
+    <h1>canvas drawing
+      <br>(high level)</h1>
+    <pre><code>
+  import {toContext} from 'ol/render';
+  
+  const vectorContext = toContext(canvasElement);
+  vectorContext.setStyle(pointStyle);
+  vectorContext.drawGeometry(new Point([15, 15]));
+      </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./magnify.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <div>
+    <h1>es modules</h1>
+    <div>
+      <p>✓ works with webpack</p>
+      <p>✓ works with parcel</p>
+      <p>✓ works with rollup</p>
+      <p>✓ #0CJS FTW!</p>
+    </div>
+  </div>
+
+  <div>
+    <h1>what's next?</h1>
+    <div>
+      <p>☐ documentation</p>
+      <p>☐ website</p>
+      <p>☐ ship it 🚢</p>
+    </div>
+  </div>
+
+  <div data-bodyclass="bright">
+    <h1>thanks</h1>
+  </div>
+
+</body>
+
+</html>

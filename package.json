@@ -1,0 +1,36 @@
+{
+  "name": "feature-frenzy",
+  "version": "6.7.0",
+  "scripts": {
+    "lint": "eslint src",
+    "test": "npm run lint",
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url ./",
+    "deploy": "rm -rf dist && npm run build && gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/openlayers/feature-frenzy.git"
+  },
+  "eslintConfig": {
+    "extends": "openlayers",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    }
+  },
+  "dependencies": {
+    "colormap": "^2.3.2",
+    "drag-drop": "^7.2.0",
+    "mproj": "^0.0.34",
+    "ol": "^6.7.1-dev.1632407403578",
+    "ol-hashed": "^2.1.0",
+    "ol-mapbox-style": "^6.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-openlayers": "^15.1.0",
+    "gh-pages": "^3.2.3",
+    "parcel": "^2.0.0-rc.0"
+  }
+}
