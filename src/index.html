@@ -288,7 +288,41 @@ olms('map', 'https://api.maptiler.com/maps/bright/style.json');
 
   <!-- Tim -->
   <div>
-    <h1>TODO: OGC Tiles</h1>
+    <h1>OGC API – Tiles
+      <br>(raster)
+    </h1>
+    <pre><code>
+import OGCMapTile from 'ol/source/OGCMapTile';
+import TileLayer from 'ol/layer/Tile';
+
+const layer = new TileLayer({
+  source: new OGCMapTile({
+    url: 'https://example.com/blueMarble/WebMercatorQuad'
+  })
+});
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>OGC API – Tiles
+      <br>(vector)
+    </h1>
+    <pre><code>
+import MVT from 'ol/format/MVT';
+import OGCVectorTile from 'ol/source/OGCVectorTile';
+import VectorTileLayer from 'ol/layer/VectorTile';
+
+const layer = new VectorTileLayer({
+  source: new OGCVectorTile({
+    url: 'https://example.com/countries/WebMercatorQuad',
+    format: new MVT(),
+  })
+});
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./ogc-tiles.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
   </div>
 
   <!-- Andreas -->
