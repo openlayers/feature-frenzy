@@ -183,16 +183,11 @@ layer.setStyle(function(feature, resolution) {
   <div>
     <h1>vector tiles</h1>
     <pre><code>
-import VectorTileLayer from 'ol/layer/VectorTile';
-import VectorTile from 'ol/source/VectorTile';
-import MVT from 'ol/format/MVT';
+import MapboxVectorLayer from 'ol/layer/MapboxVector';
 
-const vt = new VectorTileLayer({
-  source: new VectorTile({
-    format: new MVT(),
-    url: 'https://free.tilehosting.com/data/v3/' +
-        '{z}/{x}/{y}.pbf.pict'
-  })
+new MapboxVectorLayer({
+  styleUrl:
+    'https://api.maptiler.com/maps/bright/style.json',
 });
     </code></pre>
   </div>
@@ -200,9 +195,10 @@ const vt = new VectorTileLayer({
     <h1>decluttered labels
       <br>and symbols</h1>
     <pre><code>
-import {VectorTileLayer, VectorLayer} from 'ol/layer';
+import VectorTileLayer from 'ol/layer/VectorTile';
+import VectorLayer from 'ol/layer/Vector';
 
-const vt = new VectorTileLayer({
+const vectorTile = new VectorTileLayer({
   declutter: true
 });
 
@@ -214,25 +210,24 @@ const vector = new VectorLayer({
   <div>
     <h1>labels along lines</h1>
     <pre><code>
-import Text from 'ol/style/Text';
+import {Style, Text} from 'ol/style';
 
-layer.setStyle(function(feature) {
-  style.setText(new Text({
-    placement: 'line',
-    text: feature.get('name')
-  }));
-  return style;
+layer.setStyle(feature => {
+  return new Style({
+    text: new Text({
+      placement: 'line',
+      text: feature.get('name'),
+    }),
+  });
 });
     </code></pre>
   </div>
   <div>
-    <h1>vector tiles
-      <br>(mapbox style 😲)</h1>
+    <h1>mapbox style 😲</h1>
     <pre><code>
-import {apply} from 'ol-mapbox-style';
+import olms 'ol-mapbox-style';
 
-apply('map', 'https://free.tilehosting.com/' +
-    'styles/bright/style.json');
+olms('map', 'https://api.maptiler.com/maps/bright/style.json');
     </code></pre>
   </div>
 
