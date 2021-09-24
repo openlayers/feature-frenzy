@@ -3,7 +3,9 @@ import Map from 'ol/Map';
 import TileLayer from 'ol/layer/WebGLTile';
 import View from 'ol/View';
 import XYZ from 'ol/source/XYZ';
-import {fromLonLat} from 'ol/proj';
+import {useGeographic} from 'ol/proj';
+
+useGeographic();
 
 const minneapolis = {center: [-93.265, 44.9778], year: 2005};
 const lausanne = {center: [6.6323, 46.5197], year: 2006};
@@ -25,6 +27,22 @@ const duration = 3500;
 const minZoom = 4;
 const maxZoom = 10;
 
+function formatLocation(coordinate) {
+  const lat = coordinate[0];
+  const ns = lat > 0 ? 'N' : 'S';
+  const lon = coordinate[1];
+  const ew = lon > 0 ? 'E' : 'W';
+  return `${Math.abs(lat).toFixed(1)}° ${ns} ${Math.abs(lon).toFixed(
+    1
+  )}° ${ew}`;
+}
+
+function outputMarkup(location) {
+  return `${location.year}<br><small>${formatLocation(
+    location.center
+  )}</small>`;
+}
+
 const tour = [
   minneapolis,
   lausanne,
@@ -42,7 +60,7 @@ const tour = [
   bucharest,
   buenosaires,
 ].map((location) => ({
-  center: fromLonLat(location.center),
+  center: location.center,
   year: location.year,
 }));
 
@@ -83,7 +101,7 @@ map.on('click', () => {
       ++done;
       if (done == 2) {
         ++index;
-        output.innerText = tour[index - 1].year;
+        output.innerHTML = outputMarkup(tour[index - 1]);
         if (index < tour.length) {
           timer = setTimeout(step, 1200);
         }

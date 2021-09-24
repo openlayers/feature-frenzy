@@ -2,7 +2,7 @@
 # topics
 
  * Animation (T)
- * Raster reprojection (A)
+ * Reprojection (A)
  * GeoTIFF loading (T)
  * Feature interaction (A)
  * Editing (T)

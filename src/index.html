@@ -73,12 +73,13 @@
     <pre><code>
 view.animate({
   duration: 1500,
-  center: fromLonLat([-110, 45]),
+  center: [-110, 45],
   rotation: Math.PI / 4,
   zoom: 12
 })
     </code></pre>
   </div>
+
   <div>
     <h1>Animation Chaining ⛓</h1>
     <pre><code>
@@ -96,6 +97,18 @@ view.animate({
 
   <div style="width: 100%; height: 100%;">
     <iframe src="./view-animation.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <div>
+    <h1>Use Geographic ⚗️</h1>
+    <pre><code>
+import {useGeographic} from 'ol/proj';
+
+useGeographic();
+
+// use [longitude, latitude] in API
+view.setCenter([-110, 45]);
+    </code></pre>
   </div>
 
   <!-- Andreas -->
@@ -132,7 +145,7 @@ const source = new XYZSource({
 
   <!-- Tim -->
   <div>
-    <h1>GeoTIFF Sources</h1>
+    <h1>GeoTIFF Sources 🎉</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -143,7 +156,7 @@ const source = new GeoTIFF({
   </div>
 
   <div>
-    <h1>GeoTIFF Sources</h1>
+    <h1>GeoTIFF Sources 🎉</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -162,7 +175,7 @@ const source = new GeoTIFF({
   </div>
 
   <div>
-    <h1>Resolving Views</h1>
+    <h1>Resolving Views 🌱</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -210,7 +223,7 @@ const map = new Map({
 
   <!-- Tim -->
   <div>
-    <h1>Feature Editing</h1>
+    <h1>Feature Editing 🔨</h1>
     <pre><code>
 import {Draw, Modify, Snap} from 'ol/interaction';
 
@@ -221,7 +234,7 @@ map.addInteraction(
   </div>
 
   <div>
-    <h1>Feature Editing</h1>
+    <h1>Feature Editing 🔨</h1>
     <pre><code>
 import {Draw, Modify, Snap} from 'ol/interaction';
 
@@ -232,7 +245,7 @@ map.addInteraction(
   </div>
 
   <div>
-    <h1>Feature Editing</h1>
+    <h1>Feature Editing 🔨</h1>
     <pre><code>
 import {Draw, Modify, Snap} from 'ol/interaction';
 
@@ -305,7 +318,7 @@ olms('map', 'https://api.maptiler.com/maps/bright/style.json');
 
   <!-- Tim -->
   <div>
-    <h1>OGC API – Tiles
+    <h1>OGC API – Tiles ⚗️
       <br>(raster)
     </h1>
     <pre><code>
@@ -321,7 +334,7 @@ const layer = new TileLayer({
   </div>
 
   <div>
-    <h1>OGC API – Tiles
+    <h1>OGC API – Tiles ⚗️
       <br>(vector)
     </h1>
     <pre><code>
