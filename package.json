@@ -19,13 +19,18 @@
       "sourceType": "module"
     }
   },
+  "@parcel/bundler-default": {
+    "minBundles": 1,
+    "minBundleSize": 3000000,
+    "maxParallelRequests": 20
+  },
   "dependencies": {
     "colormap": "^2.3.2",
     "drag-drop": "^7.2.0",
-    "mproj": "^0.0.34",
     "ol": "^6.8.0",
     "ol-hashed": "^2.1.0",
-    "ol-mapbox-style": "^6.5.1"
+    "ol-mapbox-style": "^6.5.1",
+    "proj4": "^2.7.5"
   },
   "devDependencies": {
     "@parcel/transformer-image": "^2.0.0-rc.0",
