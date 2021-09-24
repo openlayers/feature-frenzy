@@ -7,25 +7,22 @@ import {recordStyleLayer} from 'ol-mapbox-style/dist/stylefunction';
 
 recordStyleLayer(true);
 
-let selected = [];
-const style = new Style({
+const selected = new Style({
   stroke: new Stroke({
     color: 'rgba(0, 0, 0, 0.8)',
     width: 1.5,
   }),
 });
-const selection = new VectorTile({
-  properties: {
-    selected: [],
-  },
-  style: (feature) =>
-    selected.includes(feature.get('bofo_id')) ? style : undefined,
+const selectionLayer = new VectorTile({
+  style: () => {},
 });
 
 const info = document.getElementById('output');
 function showInfo(features) {
-  selected = features.map((feature) => feature.get('bofo_id'));
-  selection.changed();
+  const selection = features.map((feature) => feature.get('bofo_id'));
+  selectionLayer.setStyle((feature) =>
+    selection.includes(feature.get('bofo_id')) ? selected : null
+  );
   if (features.length == 0) {
     info.innerText = '';
     info.style.opacity = 0;
@@ -40,11 +37,11 @@ const layer = new MapboxVectorLayer({
   styleUrl: 'https://bodenkarte.at/styles/typengruppe.json',
 });
 
-layer.on('change:source', () => selection.setSource(layer.getSource()));
+layer.on('change:source', () => selectionLayer.setSource(layer.getSource()));
 
 const map = new Map({
   target: 'map-container',
-  layers: [layer, selection],
+  layers: [layer, selectionLayer],
   view: new View({
     center: fromLonLat([15.51, 47.28]),
     zoom: 14,

@@ -178,13 +178,31 @@ const map = new Map({
 
   <!-- Andreas -->
   <div>
-    <h1>Feature interaction</h1>
+    <h1>Feature interaction<br>hit detection</h1>
     <pre><code>
       map.on('pointermove', event => {
         layer.getFeatures(event.pixel).then(showProperties);
       });
     </code></pre>
   </div>
+
+  <div>
+    <h1>Feature interaction<br>selection by id</h1>
+    <pre><code>
+      const selection = new VectorTileLayer({
+        source: layer.getSource();
+      });
+
+      layer.getFeatures(pixel).then(features => {
+        const selected = features.map(f => f.getId());
+        selection.setStyle(f => selected.includes(f.getId()) ?
+          selectStyle :
+          null
+        );
+      });
+    </code></pre>
+  </div>
+
 
   <div style="width: 100%; height: 100%;">
     <iframe src="./feature-interaction.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
