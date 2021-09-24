@@ -1,26 +1,24 @@
 import 'ol/ol.css';
 import Map from 'ol/Map';
-import MapboxVectorLayer from 'ol/layer/MapboxVector';
 import Overlay from 'ol/Overlay';
 import VectorTileLayer from 'ol/layer/VectorTile';
 import View from 'ol/View';
 import dragdrop from 'drag-drop/buffer';
-import {apply} from 'ol-mapbox-style';
+import olms from 'ol-mapbox-style';
 import {fromLonLat} from 'ol/proj';
 
 const map = new Map({
   target: 'map-container',
-  layers: [
-    new MapboxVectorLayer({
-      styleUrl:
-        'https://api.maptiler.com/maps/bright/style.json?key=lirfd6Fegsjkvs0lshxe',
-    }),
-  ],
   view: new View({
     center: fromLonLat([-34.603333, -58.381667].reverse()),
     zoom: 16,
   }),
 });
+
+olms(
+  map,
+  'https://api.maptiler.com/maps/bright/style.json?key=lirfd6Fegsjkvs0lshxe'
+);
 
 function declutter(declutter) {
   const layers = map.getLayers();
@@ -44,8 +42,8 @@ document.getElementById('declutter').addEventListener('click', function () {
 
 dragdrop('#map-container', function (files) {
   map.getLayers().clear();
-  const style = files[0].toString().replace('{key}', 'ER67WIiPdCQvhgsUjoWK');
-  apply(map, JSON.parse(style));
+  const style = files[0].toString().replace('{key}', 'lirfd6Fegsjkvs0lshxe');
+  olms(map, JSON.parse(style));
 });
 
 const overlayDiv = document.getElementById('overlay');
