@@ -427,10 +427,8 @@ const layer = new TileLayer({
   style: {
     color: [
       'interpolate', ['linear'], ndvi,
-      -1,
-      'rgb(100, 100, 100)',
-      1,
-      'rgb(0, 69, 0)'
+      -1, 'rgb(100, 100, 100)',
+      1, 'rgb(0, 69, 0)'
     ],
   }
 })
@@ -450,10 +448,9 @@ const style = {
     seaLevel: 0,
   },
   color: [
-    'interpolate', ['linear'], elevation,
-    ['var', 'seaLevel'],
+    'case',
+    ['<=', elevation, ['var', 'seaLevel']],
     [139, 212, 255, 1],
-    ['+', 0.01, ['var', 'seaLevel']],
     [139, 212, 255, 0],
   ],
 }
