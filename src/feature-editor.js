@@ -9,10 +9,7 @@ import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import {Vector as VectorSource, XYZ as XYZSource} from 'ol/source';
 import {fromLonLat} from 'ol/proj';
 
-const dataURL = new URL(
-  'data/north-carolina-districts.geojson',
-  import.meta.url
-);
+const dataURL = new URL('data/neighborhoods.geojson', import.meta.url);
 
 const source = new VectorSource({
   format: new GeoJSON(),
@@ -30,17 +27,25 @@ const map = new Map({
     }),
     new VectorLayer({
       source: source,
-      style: new Style({
-        stroke: new Stroke({
-          color: [0, 153, 255, 1],
-          width: 2,
+      style: [
+        new Style({
+          stroke: new Stroke({
+            color: 'white',
+            width: 5,
+          }),
         }),
-      }),
+        new Style({
+          stroke: new Stroke({
+            color: [0, 153, 255, 1],
+            width: 3,
+          }),
+        }),
+      ],
     }),
   ],
   view: new View({
-    center: fromLonLat([-79.093, 35.224]),
-    zoom: 7,
+    center: fromLonLat([-58.4379, -34.6127]),
+    zoom: 12,
   }),
 });
 
