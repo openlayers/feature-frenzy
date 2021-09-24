@@ -107,7 +107,7 @@ const view = new View({
 });
 
 const source = new VectorSource({
-  url: 'http://example.com/world.json',
+  url: 'https://example.com/world.json',
   format: new GeoJSON()
 });
     </code></pre>
@@ -344,7 +344,51 @@ const layer = new VectorTileLayer({
 
   <!-- Andreas -->
   <div>
-    <h1>TODO: WebGL Points</h1>
+    <h1>WebGL Points 🚀</h1>
+    <pre><code>
+import WebGLPointsLayer from 'ol/layer/WebGLPoints';
+
+new WebGLPointsLayer({
+  source: vectorSource,
+  style: {
+    symbol: {
+      symbolType: 'circle',
+      color: 'red',
+      size: 12,
+      opacity: '1'
+    }
+  }
+});
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>WebGL Points<br>(attribute math)</h1>
+    <pre><code>
+const size = ['^', ['get', 'mass'], 0.2];
+const minYear = 1850;
+const maxYear = 2015;
+const delta = ['-', maxYear, ['get', 'year']];
+const opacity = ['/', delta, maxYear - minYear];
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>WebGL Points<br>(variables and filters)</h1>
+    <pre><code>
+const styleVariables = {currentYear: 1950};
+const currentYear = ['var', 'currentYear'];
+const periodStart = ['-', currentYear, 10];
+const style = {
+  variables: styleVariables,
+  filter: ['between', ['get', 'year'], periodStart, currentYear],
+  // ...
+};
+    </code></pre>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./webgl-points.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
   </div>
 
   <!-- Tim -->
