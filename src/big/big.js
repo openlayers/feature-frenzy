@@ -1,5 +1,5 @@
 /* @flow weak */
-window.addEventListener('load', function() {
+window.addEventListener('DOMContentLoaded', function() {
   // document.body isn't a guaranteed value: Flow will yell at
   // us if we use it without checking if it exists, so let's check it here.
   if (!document.body) {
