@@ -50,7 +50,7 @@ const vectorLayer = new VectorLayer({
   source: vector3857,
   style: new Style({
     stroke: new Stroke({
-      color: 'rgba(0, 0, 255, 0.7)',
+      color: [0, 153, 255, 1],
       width: 1,
     }),
   }),

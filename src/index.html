@@ -40,6 +40,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      cursor: inherit;
     }
   </style>
   <script type="module" src="show.js"></script>
@@ -390,11 +391,11 @@ const opacity = ['/', delta, maxYear - minYear];
     <h1>WebGL Points<br>(variables and filters)</h1>
     <pre><code>
 const styleVariables = {currentYear: 1950};
-const currentYear = ['var', 'currentYear'];
-const periodStart = ['-', currentYear, 10];
+const periodEnd = ['var', 'currentYear'];
+const periodStart = ['-', periodEnd, 10];
 const style = {
   variables: styleVariables,
-  filter: ['between', ['get', 'year'], periodStart, currentYear],
+  filter: ['between', ['get', 'year'], periodStart, periodEnd],
   // ...
 };
     </code></pre>

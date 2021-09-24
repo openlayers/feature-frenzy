@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
   var printListener = window.matchMedia('print');
   printListener.addListener(onPrint);
-  document.addEventListener('click', onClick);
+  // document.addEventListener('click', onClick);
   document.addEventListener('keydown', onKeyDown);
   document.addEventListener('touchstart', onTouchStart);
   window.addEventListener('hashchange', onHashChange);
