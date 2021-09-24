@@ -27,3 +27,13 @@ html, body {
   color: inherit;
   -webkit-text-stroke: inherit;
 }
+.ol-control a {
+  text-decoration: none;
+  color: #03899c;
+}
+.ol-attribution ul {
+  font-size: 14px;
+}
+div.ol-attribution {
+  align-items: center;
+}
