@@ -475,11 +475,34 @@ slider.addEventListener('input', () => {
   </div>
 
   <div>
-    <h1>TODO: DX</h1>
+    <h1>DX</h1>
+    <center>OpenLayers is JSDoc typed</center>
+    <center>We publish type definitions</center>
+    <center>You get type checking, autocomplete and hints! 🤩</center>
+  </div>
+
+  <div>
+    <img src="./data/dx.gif">
   </div>
 
   <div data-bodyclass="bright">
     <h1>thanks</h1>
+    <center>Consider becoming a sponsor</center>
+    <br>
+    <center>project: <a href="https://github.com/sponsors/openlayers">https://github.com/sponsors/openlayers</a></center>
+    <br>
+    <center>developers: <a id="sponsor-dev"></a></center>
+    <script>
+      const devs = ['tschaub', 'ahocevar', 'twpayne', 'fredj', 'elemoine', 'crschmidt', 'marcjansen', 'mike-000', 'jahow', 'probins', 'MoonE', 'schuyler', 'bartvde', 'tonio', 'gberaudo', 'petrsloup', 'simonseyock', 'bbinet', 'fgravin', 'GaborFarkas', 'pgiraud', 'pagameba', 'schmidtk', 'bjornharrtell']
+      const sponsorDev = document.getElementById('sponsor-dev');
+      let index = 0;
+      setInterval(() => {
+        const link = `https://github.com/sponsors/${devs[index]}`;
+        sponsorDev.href = link;
+        sponsorDev.innerText = link;
+        index = ++index % devs.length;
+      }, 500);
+    </script>
   </div>
 
 </body>
