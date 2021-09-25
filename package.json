@@ -27,7 +27,7 @@
   "dependencies": {
     "colormap": "^2.3.2",
     "drag-drop": "^7.2.0",
-    "ol": "^6.8.0",
+    "ol": "^6.8.1",
     "ol-hashed": "^2.1.0",
     "ol-mapbox-style": "^6.5.1",
     "proj4": "^2.7.5"
