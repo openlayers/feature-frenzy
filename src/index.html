@@ -151,7 +151,9 @@ const source = new XYZSource({
 import GeoTIFF from 'ol/source/GeoTIFF';
 
 const source = new GeoTIFF({
-  sources: [{url: 'https://example.com/world.tif'}]
+  sources: [
+    {url: 'https://example.com/world.tif'},
+  ]
 });
     </code></pre>
   </div>
@@ -185,7 +187,7 @@ const source = new GeoTIFF(options);
 const map = new Map({
   target: 'container',
   layers: [new TileLayer({source})],
-  view: source.getView(),
+  <span class="bright">view: source.getView(),</span>
 });
     </code></pre>
   </div>
@@ -195,7 +197,9 @@ const map = new Map({
     <h1>Feature interaction<br>hit detection</h1>
     <pre><code>
       map.on('pointermove', event => {
-        layer.getFeatures(event.pixel).then(showProperties);
+        layer
+          .getFeatures(event.pixel)
+          .then(showProperties);
       });
     </code></pre>
   </div>
@@ -204,14 +208,15 @@ const map = new Map({
     <h1>Feature interaction<br>selection by id</h1>
     <pre><code>
       const selection = new VectorTileLayer({
-        source: layer.getSource();
+        source: layer.getSource()
       });
 
       layer.getFeatures(pixel).then(features => {
         const selected = features.map(f => f.getId());
-        selection.setStyle(f => selected.includes(f.getId()) ?
-          selectStyle :
-          null
+        selection.setStyle(f =>
+          selected.includes(f.getId())
+            ? selectStyle
+            : null
         );
       });
     </code></pre>
@@ -328,7 +333,7 @@ import TileLayer from 'ol/layer/Tile';
 
 const layer = new TileLayer({
   source: new OGCMapTile({
-    url: 'https://example.com/blueMarble/WebMercatorQuad'
+    url: 'https://example.com/bluemarble/mercator'
   })
 });
     </code></pre>
@@ -345,7 +350,7 @@ import VectorTileLayer from 'ol/layer/VectorTile';
 
 const layer = new VectorTileLayer({
   source: new OGCVectorTile({
-    url: 'https://example.com/countries/WebMercatorQuad',
+    url: 'https://example.com/countries/mercator',
     format: new MVT(),
   })
 });
@@ -390,12 +395,13 @@ const opacity = ['/', delta, maxYear - minYear];
   <div>
     <h1>WebGL Points<br>(variables and filters)</h1>
     <pre><code>
-const styleVariables = {currentYear: 1950};
 const periodEnd = ['var', 'currentYear'];
 const periodStart = ['-', periodEnd, 10];
 const style = {
-  variables: styleVariables,
-  filter: ['between', ['get', 'year'], periodStart, periodEnd],
+  variables: {currentYear: 1950},
+  filter: [
+    'between', ['get', 'year'], periodStart, periodEnd
+  ],
   // ...
 };
     </code></pre>
@@ -489,9 +495,9 @@ slider.addEventListener('input', () => {
     <h1>thanks</h1>
     <center>Consider becoming a sponsor</center>
     <br>
-    <center>project: <a href="https://github.com/sponsors/openlayers">https://github.com/sponsors/openlayers</a></center>
+    <center>project:<br><a href="https://github.com/sponsors/openlayers">https://github.com/sponsors/openlayers</a></center>
     <br>
-    <center>developers: <a id="sponsor-dev"></a></center>
+    <center>developers:<br><a id="sponsor-dev"></a></center>
     <script>
       const devs = ['tschaub', 'ahocevar', 'twpayne', 'fredj', 'elemoine', 'crschmidt', 'marcjansen', 'mike-000', 'jahow', 'probins', 'MoonE', 'schuyler', 'bartvde', 'tonio', 'gberaudo', 'petrsloup', 'simonseyock', 'bbinet', 'fgravin', 'GaborFarkas', 'pgiraud', 'pagameba', 'schmidtk', 'bjornharrtell']
       const sponsorDev = document.getElementById('sponsor-dev');
