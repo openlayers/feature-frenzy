@@ -48,9 +48,9 @@ const map = new Map({
   ],
 });
 
-get('EPSG:3857').setGetPointResolution(resolution => resolution);
+get('EPSG:3857').setGetPointResolution((resolution) => resolution);
 get('EPSG:3182').setGetPointResolution(
-  resolution => resolution * resolutionFactor
+  (resolution) => resolution * resolutionFactor
 );
 
 const view3857 = new View({

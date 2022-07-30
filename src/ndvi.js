@@ -73,7 +73,7 @@ const layer = new TileLayer({
 const map = new Map({
   target: 'map-container',
   layers: [layer],
-  view: source.getView().then(options => ({
+  view: source.getView().then((options) => ({
     ...options,
     zoom: 2,
   })),

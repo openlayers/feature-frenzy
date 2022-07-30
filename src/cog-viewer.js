@@ -42,7 +42,7 @@ const visualizations = [
 function createLayer(base, visualization) {
   const source = new GeoTIFF({
     normalize: visualization.normalize,
-    sources: visualization.sources.map(id => ({
+    sources: visualization.sources.map((id) => ({
       url: `${base}/${id}.tif`,
     })),
   });
@@ -58,14 +58,14 @@ const map = new Map({
 });
 
 const visualizationSelector = document.getElementById('visualization');
-visualizations.forEach(visualization => {
+visualizations.forEach((visualization) => {
   const option = document.createElement('option');
   option.textContent = visualization.name;
   visualizationSelector.appendChild(option);
 });
 
 const imageSelector = document.getElementById('image');
-images.forEach(image => {
+images.forEach((image) => {
   const option = document.createElement('option');
   option.textContent = image.name;
   imageSelector.appendChild(option);
@@ -87,7 +87,7 @@ function updateVisualization() {
       layer
         .getSource()
         .getView()
-        .then(options => ({
+        .then((options) => ({
           ...options,
           zoom: 2,
         }))
