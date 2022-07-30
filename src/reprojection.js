@@ -3,7 +3,6 @@ import GeoJSON from 'ol/format/GeoJSON';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import proj4 from 'proj4';
-import {Stroke, Style} from 'ol/style';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import {Vector, XYZ} from 'ol/source';
 import {get, transform} from 'ol/proj';
@@ -30,12 +29,10 @@ const vector3128 = new Vector({
 });
 const vectorLayer = new VectorLayer({
   source: vector3857,
-  style: new Style({
-    stroke: new Stroke({
-      color: [0, 153, 255, 1],
-      width: 1,
-    }),
-  }),
+  style: {
+    'stroke-color': [0, 153, 255, 1],
+    'stroke-width': 1,
+  },
 });
 
 const map = new Map({
@@ -51,12 +48,10 @@ const map = new Map({
   ],
 });
 
-get('EPSG:3857').setGetPointResolution(function (resolution, coordinate) {
-  return resolution;
-});
-get('EPSG:3182').setGetPointResolution(function (resolution, coordinate) {
-  return resolution * resolutionFactor;
-});
+get('EPSG:3857').setGetPointResolution(resolution => resolution);
+get('EPSG:3182').setGetPointResolution(
+  resolution => resolution * resolutionFactor
+);
 
 const view3857 = new View({
   center: transform(nuuk, 'EPSG:4326', 'EPSG:3857'),

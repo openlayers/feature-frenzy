@@ -4,7 +4,6 @@ import Link from 'ol/interaction/Link';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import {Draw, Modify, Snap} from 'ol/interaction';
-import {Stroke, Style} from 'ol/style';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import {Vector as VectorSource, XYZ as XYZSource} from 'ol/source';
 import {fromLonLat} from 'ol/proj';
@@ -28,18 +27,14 @@ const map = new Map({
     new VectorLayer({
       source: source,
       style: [
-        new Style({
-          stroke: new Stroke({
-            color: 'white',
-            width: 5,
-          }),
-        }),
-        new Style({
-          stroke: new Stroke({
-            color: [0, 153, 255, 1],
-            width: 3,
-          }),
-        }),
+        {
+          'stroke-color': 'white',
+          'stroke-width': 5,
+        },
+        {
+          'stroke-color': [0, 153, 255, 1],
+          'stroke-width': 3,
+        },
       ],
     }),
   ],
