@@ -27,3 +27,7 @@ html, body {
   color: inherit;
   -webkit-text-stroke: inherit;
 }
+
+.ol-control {
+  display: none;
+}

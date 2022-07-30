@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <title>Big</title>
-  <link href="big/big.css" rel="stylesheet" type="text/css" />
-  <link href="big/highlight.css" rel="stylesheet" type="text/css" />
+  <title>Feature Frenzy</title>
+  <link href="./big/big.css" rel="stylesheet" type="text/css" />
+  <link href="./big/highlight.css" rel="stylesheet" type="text/css" />
   <style>
     body {
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -43,7 +43,7 @@
       cursor: inherit;
     }
   </style>
-  <script type="module" src="show.js"></script>
+  <script type="module" src="./show.js"></script>
 </head>
 
 <body class="light">
@@ -187,6 +187,17 @@ const source = new GeoTIFF({
 
   <div style="width: 100%; height: 100%;">
     <iframe src="./cog-viewer.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <div>
+    <h1>Pixel Data</h1>
+    <pre><code>
+map.on('pointermove', event => {
+  const data = <span class="bright">layer.getData(event.pixel)</span>;
+  // do something with the pixel data
+  console.log(data);
+});
+    </code></pre>
   </div>
 
   <div>
@@ -468,7 +479,7 @@ const style = {
   },
   color: [
     'case',
-    ['<=', elevation, ['var', 'seaLevel']],
+    ['&lt;=', elevation, ['var', 'seaLevel']],
     [139, 212, 255, 1],
     [139, 212, 255, 0],
   ],

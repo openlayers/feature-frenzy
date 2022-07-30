@@ -62,7 +62,7 @@ const map = new Map({
     layer,
   ],
   view: new View({
-    center: fromLonLat([-58.3816, -34.6037]),
+    center: fromLonLat([-73.9338, 40.6861]),
     zoom: 11,
   }),
 });

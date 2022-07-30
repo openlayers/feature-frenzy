@@ -3,12 +3,18 @@
 
 <head>
   <title>cog viewer</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
   <style>
     #controls {
       position: absolute;
       top: 20px;
       right: 20px;
+    }
+    #info {
+      margin-top: 10px;
+      font-size: 26px;
+      color: white;
+      text-align: right;
     }
   </style>
 </head>
@@ -16,10 +22,13 @@
 <body>
   <div id="map-container"></div>
   <div id="controls">
-    <select id="image"></select>
-    <select id="visualization"></select>
+    <div>
+      <select id="image"></select>
+      <select id="visualization"></select>
+    </div>
+    <pre id="info"></pre>
   </div>
-  <script type="module" src="cog-viewer.js"></script>
+  <script type="module" src="./cog-viewer.js"></script>
 </body>
 
 </html>

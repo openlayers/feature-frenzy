@@ -21,19 +21,29 @@ const visualizations = [
   {
     name: 'True Color',
     sources: ['TCI'],
+    normalize: true,
   },
   {
     name: 'False Color',
     sources: ['B08', 'B04', 'B03'],
-    max: 5000,
+    normalize: false,
+    style: {
+      color: [
+        'array',
+        ['/', ['band', 1], 5000],
+        ['/', ['band', 2], 5000],
+        ['/', ['band', 3], 5000],
+        1,
+      ],
+    },
   },
 ];
 
 function createLayer(base, visualization) {
   const source = new GeoTIFF({
-    sources: visualization.sources.map((id) => ({
+    normalize: visualization.normalize,
+    sources: visualization.sources.map(id => ({
       url: `${base}/${id}.tif`,
-      max: visualization.max,
     })),
   });
 
@@ -48,27 +58,28 @@ const map = new Map({
 });
 
 const visualizationSelector = document.getElementById('visualization');
-visualizations.forEach((visualization) => {
+visualizations.forEach(visualization => {
   const option = document.createElement('option');
   option.textContent = visualization.name;
   visualizationSelector.appendChild(option);
 });
 
 const imageSelector = document.getElementById('image');
-images.forEach((image) => {
+images.forEach(image => {
   const option = document.createElement('option');
   option.textContent = image.name;
   imageSelector.appendChild(option);
 });
 
 let previousBase;
+let layer;
 function updateVisualization() {
   const visualization = visualizations[visualizationSelector.selectedIndex];
   const base = images[imageSelector.selectedIndex].base;
   const newBase = base !== previousBase;
   previousBase = base;
 
-  const layer = createLayer(base, visualization);
+  layer = createLayer(base, visualization);
   map.setLayers([layer]);
 
   if (newBase) {
@@ -76,9 +87,9 @@ function updateVisualization() {
       layer
         .getSource()
         .getView()
-        .then((options) => ({
+        .then(options => ({
           ...options,
-          zoom: 1,
+          zoom: 2,
         }))
     );
   }
@@ -87,3 +98,23 @@ function updateVisualization() {
 visualizationSelector.addEventListener('change', updateVisualization);
 imageSelector.addEventListener('change', updateVisualization);
 updateVisualization();
+
+function spacePad(value, count) {
+  return value.toString().padStart(count, ' ');
+}
+
+const info = document.getElementById('info');
+function displayPixelValue(event) {
+  if (!layer) {
+    return;
+  }
+  const data = layer.getData(event.pixel);
+  if (!data) {
+    return;
+  }
+  const lines = Array.from(data)
+    .slice(0, 3)
+    .map((value, i) => `B${i + 1}: ${spacePad(value, 5)}  `);
+  info.textContent = lines.join('\n');
+}
+map.on(['pointermove', 'click'], displayPixelValue);

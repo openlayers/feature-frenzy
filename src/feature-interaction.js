@@ -3,7 +3,7 @@ import {Map, View} from 'ol';
 import {Stroke, Style} from 'ol/style';
 import {VectorTile} from 'ol/layer';
 import {fromLonLat} from 'ol/proj';
-import {recordStyleLayer} from 'ol-mapbox-style/dist/stylefunction';
+import {recordStyleLayer} from 'ol-mapbox-style';
 
 recordStyleLayer(true);
 
@@ -19,16 +19,16 @@ const selectionLayer = new VectorTile({
 
 const info = document.getElementById('output');
 function showInfo(features) {
-  const selection = features.map((feature) => feature.get('bofo_id'));
-  selectionLayer.setStyle((feature) =>
+  const selection = features.map(feature => feature.get('bofo_id'));
+  selectionLayer.setStyle(feature =>
     selection.includes(feature.get('bofo_id')) ? selected : null
   );
-  if (features.length == 0) {
+  if (features.length === 0) {
     info.innerText = '';
     info.style.opacity = 0;
     return;
   }
-  const ids = features.map((feature) => feature.get('mapbox-layer').id);
+  const ids = features.map(feature => feature.get('mapbox-layer').id);
   info.innerText = ids.join(',');
   info.style.opacity = 1;
 }
@@ -48,6 +48,6 @@ const map = new Map({
   }),
 });
 
-map.on('pointermove', (event) => {
+map.on('pointermove', event => {
   layer.getFeatures(event.pixel).then(showInfo);
 });
