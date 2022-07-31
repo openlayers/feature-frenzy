@@ -190,7 +190,7 @@ const source = new GeoTIFF({
   </div>
 
   <div>
-    <h1>Pixel Data</h1>
+    <h1>Pixel Data 🌱</h1>
     <pre><code>
 map.on('pointermove', event => {
   const data = <span class="bright">layer.getData(event.pixel)</span>;
@@ -251,6 +251,38 @@ const map = new Map({
   </div>
 
   <!-- Tim -->
+  <div>
+    <h1>Flat Style 🌱</h1>
+    <pre><code>
+import {Fill, Stroke, Style} from 'ol/style';
+
+// previously
+layer.setStyle(
+  new Style({
+    fill: new Fill({
+      color: 'orange',
+    }),
+    stroke: new Stroke({
+      color: 'red',
+      width: 5,
+    }),
+  })
+);
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>Flat Style 🌱</h1>
+    <pre><code>
+// new flat style
+layer.setStyle({
+  'fill-color': 'orange',
+  'stroke-color': 'red',
+  'stroke-width': 5,
+});
+    </code></pre>
+  </div>
+
   <div>
     <h1>Feature Editing 🔨</h1>
     <pre><code>
