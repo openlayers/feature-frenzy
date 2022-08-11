@@ -13,6 +13,7 @@
  * COG rendering (T)
    * getData
    * loadstart / loadend
+   * link interaction
  * vector tile rendering (A)
    * decluttering
    * rich text labels
