@@ -1,15 +1,24 @@
 
 # topics
 
- * Animation (T)
- * Reprojection (A)
- * GeoTIFF loading (T)
- * Feature interaction (A)
- * Editing (T)
- * Vector tiles (A)
- * OGC Tiles (T)
- * WebGL points (A)
- * WebGL tiles (T)
- * Dev experience (A)
-
- * Thanks (sponsoring)
+ * Version 7 is here (T)
+   * npm create ol-app my-app
+   * no IE support
+   * untranspiled modules
+ * WebGL vector rendering (A)
+   * graticule
+ * feature tracing (T)
+   * flat styles
+   * translate
+ * COG rendering (T)
+   * getData
+   * loadstart / loadend
+ * vector tile rendering (A)
+   * decluttering
+   * rich text labels
+ * mixed rendering tech (A)
+   * SVG world over webgl tiles
+   * share renderers when possible
+ * conclusion (A/T)
+   * dev experience / typescript
+   * thanks / sponsor
