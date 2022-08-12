@@ -92,7 +92,8 @@ const source = new VectorSource({
   </div>
   <div>
     <h1>Reprojection
-      <br>(raster too 💪)</h1>
+      <br>(raster too 💪)
+    </h1>
     <pre><code>
 const view = new View({
   projection: custom
@@ -103,7 +104,7 @@ const source = new XYZSource({
 });
     </code></pre>
   </div>
-  
+
   <div style="width: 100%; height: 100%;">
     <iframe src="./reprojection.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
   </div>
@@ -288,7 +289,8 @@ new MapboxVectorLayer({
   </div>
   <div>
     <h1>Decluttered labels
-      <br>and symbols</h1>
+      <br>and symbols
+    </h1>
     <pre><code>
 import VectorTileLayer from 'ol/layer/VectorTile';
 import VectorLayer from 'ol/layer/Vector';
@@ -319,7 +321,8 @@ layer.setStyle(feature => {
   </div>
   <div>
     <h1>Mapbox Style
-      <br>(not only vector tiles 😲)</h1>
+      <br>(not only vector tiles 😲)
+    </h1>
     <pre><code>
 import olms 'ol-mapbox-style';
 
@@ -423,7 +426,8 @@ const style = {
   <!-- Tim -->
   <div>
     <h1>WebGL Tiles
-      <br>(band math)</h1>
+      <br>(band math)
+    </h1>
     <pre><code>
 const red = ['band', 3];
 const nir = ['band', 4];
@@ -436,7 +440,8 @@ const ndvi = ['/', diff, sum];
 
   <div>
     <h1>WebGL Tiles
-      <br>(style expressions)</h1>
+      <br>(style expressions)
+    </h1>
     <pre><code>
 const layer = new TileLayer({
   source: new GeoTIFF(options),
@@ -457,7 +462,8 @@ const layer = new TileLayer({
 
   <div>
     <h1>WebGL Tiles
-      <br>(variables)</h1>
+      <br>(variables)
+    </h1>
     <pre><code>
 const style = {
   variables: {
@@ -475,7 +481,8 @@ const style = {
 
   <div>
     <h1>WebGL Tiles
-      <br>(variables)</h1>
+      <br>(variables)
+    </h1>
     <pre><code>
 slider.addEventListener('input', () => {
   layer.updateStyleVariables({
@@ -504,7 +511,8 @@ slider.addEventListener('input', () => {
     <h1>thanks</h1>
     <center>Consider becoming a sponsor</center>
     <br>
-    <center>project:<br><a href="https://github.com/sponsors/openlayers">https://github.com/sponsors/openlayers</a></center>
+    <center>project:<br><a href="https://github.com/sponsors/openlayers">https://github.com/sponsors/openlayers</a>
+    </center>
     <br>
     <center>developers:<br><a id="sponsor-dev"></a></center>
     <script>
