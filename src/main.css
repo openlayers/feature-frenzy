@@ -1,0 +1,36 @@
+@import "../node_modules/highlight.js/styles/stackoverflow-light.css";
+
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.bright {
+  background: #FDCC32;
+}
+
+.block {
+  display: block;
+}
+
+h1 {
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.slide-container {
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+div.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: inherit;
+}

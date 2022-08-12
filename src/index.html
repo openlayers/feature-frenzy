@@ -6,44 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <title>Feature Frenzy</title>
   <link href="./big/big.css" rel="stylesheet" type="text/css" />
-  <link href="./big/highlight.css" rel="stylesheet" type="text/css" />
-  <style>
-    body {
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    }
-
-    .bright {
-      background: #FDCC32;
-    }
-
-    .block {
-      display: block;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    .center {
-      text-align: center;
-    }
-
-    .slide-container {
-      justify-content: center;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    div.slide {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: inherit;
-    }
-  </style>
-  <script type="module" src="./show.js"></script>
+  <link href="./main.css" rel="stylesheet" type="text/css" />
+  <script type="module" src="./main.js"></script>
 </head>
 
 <body class="light">
@@ -75,18 +39,6 @@
 view.animate({
   duration: 1500,
   center: [-110, 45],
-  rotation: Math.PI / 4,
-  zoom: 12
-})
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>View Animation</h1>
-    <pre><code>
-view.animate({
-  duration: 1500,
-  <span class="bright">center: [-110, 45],</span>
   rotation: Math.PI / 4,
   zoom: 12
 })
@@ -193,7 +145,8 @@ const source = new GeoTIFF({
     <h1>Pixel Data 🌱</h1>
     <pre><code>
 map.on('pointermove', event => {
-  const data = <span class="bright">layer.getData(event.pixel)</span>;
+  // this next line is the new part!
+  layer.getData(event.pixel);
   // do something with the pixel data
   console.log(data);
 });
@@ -210,7 +163,8 @@ const source = new GeoTIFF(options);
 const map = new Map({
   target: 'container',
   layers: [new TileLayer({source})],
-  <span class="bright">view: source.getView(),</span>
+  // this next line is the new part!
+  view: source.getView(),
 });
     </code></pre>
   </div>
