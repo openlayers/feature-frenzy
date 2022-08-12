@@ -34,37 +34,6 @@
 
   <!-- Tim -->
   <div>
-    <h1>View Animation</h1>
-    <pre><code>
-view.animate({
-  duration: 1500,
-  center: [-110, 45],
-  rotation: Math.PI / 4,
-  zoom: 12
-})
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>Animation Chaining ⛓</h1>
-    <pre><code>
-view.animate({
-  center: london,
-  easing: easeIn
-}, {
-  center: rome,
-  easing: easeOut
-}, function() {
-  // all done
-});
-    </code></pre>
-  </div>
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./view-animation.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
-  </div>
-
-  <div>
     <h1>Use Geographic ⚗️</h1>
     <pre><code>
 import {useGeographic} from 'ol/proj';
