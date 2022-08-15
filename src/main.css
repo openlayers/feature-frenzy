@@ -4,6 +4,7 @@ body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+.bright pre code.hljs,
 .bright {
   background: #FDCC32;
 }
@@ -33,4 +34,8 @@ div.slide {
   flex-direction: column;
   align-items: center;
   cursor: inherit;
+}
+
+ul {
+  list-style-type: circle;
 }

@@ -22,60 +22,153 @@
     <p>tim@planet.com</p>
   </div>
 
+  <!-- Tim -->
+
   <div data-bodyclass="bright center">
     <h1>New to OpenLayers?</h1>
-    <br>
-    <div>
-      <code>npm install ol</code>
-    </div>
-    <br>
+    <pre><code>
+npm create ol-app my-app
+cd my-app
+npm start
+    </code></pre>
     <p>Let's dive in! 🚀</p>
   </div>
 
-  <!-- Tim -->
   <div>
-    <h1>Use Geographic ⚗️</h1>
+    <h1>ol@7 is here!</h1>
+  </div>
+
+  <div>
+    <img src="./data/bye-byie.png">
+  </div>
+
+  <div>
+    <h1>new in ol@7 🎉</h1>
+    <ul>
+      <li>untranspiled modules <br><small><i>(package size dropped 5 MB)</i></small></li>
+      <li>new webgl vector renderer</li>
+      <li>other goodies</li>
+    </ul>
+  </div>
+
+  <!-- Andreas -->
+
+  <div>
+    <h1>TODO</h1>
+    <ul>
+      <li>webgl vector rendering</li>
+      <li>graticule</li>
+    </ul>
+  </div>
+
+  <!-- Tim -->
+
+  <div>
+    <h1>TODO</h1>
+    <ul>
+      <li>feature tracing</li>
+      <li>translate</li>
+      <li>flat style</li>
+    </ul>
+  </div>
+
+  <div>
+    <h1>Flat Style 🌱</h1>
     <pre><code>
-import {useGeographic} from 'ol/proj';
+import {Fill, Stroke, Style} from 'ol/style';
 
-useGeographic();
+// previously
+layer.setStyle(
+  new Style({
+    fill: new Fill({
+      color: 'orange',
+    }),
+    stroke: new Stroke({
+      color: 'red',
+      width: 5,
+    }),
+  })
+);
+    </code></pre>
+  </div>
 
-// use [longitude, latitude] in API
-view.setCenter([-110, 45]);
+  <div>
+    <h1>Flat Style 🌱</h1>
+    <pre><code>
+// new flat style
+layer.setStyle({
+  'fill-color': 'orange',
+  'stroke-color': 'red',
+  'stroke-width': 5,
+});
     </code></pre>
   </div>
 
   <!-- Andreas -->
-  <div>
-    <h1>Reprojection</h1>
-    <pre><code>
-const view = new View({
-  projection: custom
-});
 
-const source = new VectorSource({
-  url: 'https://example.com/world.json',
-  format: new GeoJSON()
+  <div>
+    <h1>Vector tiles</h1>
+    <pre><code>
+import MapboxVectorLayer from 'ol/layer/MapboxVector';
+
+new MapboxVectorLayer({
+  styleUrl:
+    'https://api.maptiler.com/maps/bright/style.json',
 });
     </code></pre>
   </div>
   <div>
-    <h1>Reprojection
-      <br>(raster too 💪)
+    <h1>Decluttered labels
+      <br>and symbols
     </h1>
     <pre><code>
-const view = new View({
-  projection: custom
+import VectorTileLayer from 'ol/layer/VectorTile';
+import VectorLayer from 'ol/layer/Vector';
+
+const vectorTile = new VectorTileLayer({
+  declutter: true
 });
 
-const source = new XYZSource({
-  projection: mercator
+const vector = new VectorLayer({
+  declutter: true
 });
+    </code></pre>
+  </div>
+  <div>
+    <h1>Labels along lines</h1>
+    <pre><code>
+import {Style, Text} from 'ol/style';
+
+layer.setStyle(feature => {
+  return new Style({
+    text: new Text({
+      placement: 'line',
+      text: feature.get('name'),
+    }),
+  });
+});
+    </code></pre>
+  </div>
+  <div>
+    <h1>Mapbox Style
+      <br>(not only vector tiles 😲)
+    </h1>
+    <pre><code>
+import olms 'ol-mapbox-style';
+
+olms('map', 'https://api.maptiler.com/maps/bright/style.json');
     </code></pre>
   </div>
 
   <div style="width: 100%; height: 100%;">
-    <iframe src="./reprojection.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+    <iframe src="./vector-tiles.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <div>
+    <h1>TODO</h1>
+    <ul>
+      <li>rich text style</li>
+    </ul>
   </div>
 
   <!-- Tim -->
@@ -139,207 +232,24 @@ const map = new Map({
     </code></pre>
   </div>
 
-  <!-- Andreas -->
   <div>
-    <h1>Feature interaction<br>hit detection</h1>
-    <pre><code>
-      map.on('pointermove', event => {
-        layer
-          .getFeatures(event.pixel)
-          .then(showProperties);
-      });
-    </code></pre>
+    <h1>TODO</h1>
+    <ul>
+      <li>loadstart/loadend</li>
+      <li>link interaction</li>
+    </ul>
   </div>
 
-  <div>
-    <h1>Feature interaction<br>selection by id</h1>
-    <pre><code>
-      const selection = new VectorTileLayer({
-        source: layer.getSource()
-      });
-
-      layer.getFeatures(pixel).then(features => {
-        const selected = features.map(f => f.getId());
-        selection.setStyle(f =>
-          selected.includes(f.getId())
-            ? selectStyle
-            : null
-        );
-      });
-    </code></pre>
-  </div>
-
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./feature-interaction.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
-  </div>
-
-  <!-- Tim -->
-  <div>
-    <h1>Flat Style 🌱</h1>
-    <pre><code>
-import {Fill, Stroke, Style} from 'ol/style';
-
-// previously
-layer.setStyle(
-  new Style({
-    fill: new Fill({
-      color: 'orange',
-    }),
-    stroke: new Stroke({
-      color: 'red',
-      width: 5,
-    }),
-  })
-);
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>Flat Style 🌱</h1>
-    <pre><code>
-// new flat style
-layer.setStyle({
-  'fill-color': 'orange',
-  'stroke-color': 'red',
-  'stroke-width': 5,
-});
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>Feature Editing 🔨</h1>
-    <pre><code>
-import {Draw, Modify, Snap} from 'ol/interaction';
-
-map.addInteraction(
-  new Draw({type: 'Polygon', source: source})
-);
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>Feature Editing 🔨</h1>
-    <pre><code>
-import {Draw, Modify, Snap} from 'ol/interaction';
-
-map.addInteraction(
-  new Modify({source: source})
-);
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>Feature Editing 🔨</h1>
-    <pre><code>
-import {Draw, Modify, Snap} from 'ol/interaction';
-
-map.addInteraction(
-  new Snap({source: source})
-);
-    </code></pre>
-  </div>
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./feature-editor.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
-  </div>
 
   <!-- Andreas -->
-  <div>
-    <h1>Vector tiles</h1>
-    <pre><code>
-import MapboxVectorLayer from 'ol/layer/MapboxVector';
-
-new MapboxVectorLayer({
-  styleUrl:
-    'https://api.maptiler.com/maps/bright/style.json',
-});
-    </code></pre>
-  </div>
-  <div>
-    <h1>Decluttered labels
-      <br>and symbols
-    </h1>
-    <pre><code>
-import VectorTileLayer from 'ol/layer/VectorTile';
-import VectorLayer from 'ol/layer/Vector';
-
-const vectorTile = new VectorTileLayer({
-  declutter: true
-});
-
-const vector = new VectorLayer({
-  declutter: true
-});
-    </code></pre>
-  </div>
-  <div>
-    <h1>Labels along lines</h1>
-    <pre><code>
-import {Style, Text} from 'ol/style';
-
-layer.setStyle(feature => {
-  return new Style({
-    text: new Text({
-      placement: 'line',
-      text: feature.get('name'),
-    }),
-  });
-});
-    </code></pre>
-  </div>
-  <div>
-    <h1>Mapbox Style
-      <br>(not only vector tiles 😲)
-    </h1>
-    <pre><code>
-import olms 'ol-mapbox-style';
-
-olms('map', 'https://api.maptiler.com/maps/bright/style.json');
-    </code></pre>
-  </div>
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./vector-tiles.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
-  </div>
-
-  <!-- Tim -->
-  <div>
-    <h1>OGC API – Tiles ⚗️
-      <br>(raster)
-    </h1>
-    <pre><code>
-import OGCMapTile from 'ol/source/OGCMapTile';
-import TileLayer from 'ol/layer/Tile';
-
-const layer = new TileLayer({
-  source: new OGCMapTile({
-    url: 'https://example.com/bluemarble/mercator'
-  })
-});
-    </code></pre>
-  </div>
 
   <div>
-    <h1>OGC API – Tiles ⚗️
-      <br>(vector)
-    </h1>
-    <pre><code>
-import MVT from 'ol/format/MVT';
-import OGCVectorTile from 'ol/source/OGCVectorTile';
-import VectorTileLayer from 'ol/layer/VectorTile';
-
-const layer = new VectorTileLayer({
-  source: new OGCVectorTile({
-    url: 'https://example.com/countries/mercator',
-    format: new MVT(),
-  })
-});
-    </code></pre>
-  </div>
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./ogc-tiles.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+    <h1>TODO</h1>
+    <ul>
+      <li>mixed rendering tech</li>
+      <li>svg world over webgl tiles</li>
+      <li>share renderers when possible</li>
+    </ul>
   </div>
 
   <!-- Andreas -->

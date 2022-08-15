@@ -10,13 +10,13 @@
  * feature tracing (T)
    * flat styles
    * translate
+ * vector tile rendering (A)
+   * decluttering
+   * rich text labels
  * COG rendering (T)
    * getData
    * loadstart / loadend
    * link interaction
- * vector tile rendering (A)
-   * decluttering
-   * rich text labels
  * mixed rendering tech (A)
    * SVG world over webgl tiles
    * share renderers when possible
