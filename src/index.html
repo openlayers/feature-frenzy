@@ -45,8 +45,8 @@ npm start
   <div>
     <h1>new in ol@7 🎉</h1>
     <ul>
-      <li>untranspiled modules <br><small><i>(package size dropped 5 MB)</i></small></li>
       <li>new webgl vector renderer</li>
+      <li>untranspiled modules <br><small><i>(package size dropped 5 MB)</i></small></li>
       <li>other goodies</li>
     </ul>
   </div>
@@ -64,18 +64,23 @@ npm start
   <!-- Tim -->
 
   <div>
-    <h1>TODO</h1>
+    <h1>vector editing 💪</h1>
     <ul>
-      <li>feature tracing</li>
-      <li>translate</li>
-      <li>flat style</li>
+      <li>interactions for drawing, modifying, translating, and snapping</li>
+      <li>performance improvements and new functionality</li>
     </ul>
   </div>
 
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./feature-tracing.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
   <div>
-    <h1>Flat Style 🌱</h1>
+    <h1>old style</h1>
     <pre><code>
-import {Fill, Stroke, Style} from 'ol/style';
+import Style from 'ol/style/Style';
+import Fill from 'ol/style/Fill';
+import Stroke from 'ol/style/Stroke';
 
 // previously
 layer.setStyle(
@@ -93,9 +98,9 @@ layer.setStyle(
   </div>
 
   <div>
-    <h1>Flat Style 🌱</h1>
+    <h1>new style 🌱</h1>
     <pre><code>
-// new flat style
+// for static styles
 layer.setStyle({
   'fill-color': 'orange',
   'stroke-color': 'red',
@@ -107,7 +112,7 @@ layer.setStyle({
   <!-- Andreas -->
 
   <div>
-    <h1>Vector tiles</h1>
+    <h1>vector tiles</h1>
     <pre><code>
 import MapboxVectorLayer from 'ol/layer/MapboxVector';
 
@@ -117,8 +122,9 @@ new MapboxVectorLayer({
 });
     </code></pre>
   </div>
+
   <div>
-    <h1>Decluttered labels
+    <h1>decluttered labels
       <br>and symbols
     </h1>
     <pre><code>
@@ -135,7 +141,7 @@ const vector = new VectorLayer({
     </code></pre>
   </div>
   <div>
-    <h1>Labels along lines</h1>
+    <h1>labels along lines</h1>
     <pre><code>
 import {Style, Text} from 'ol/style';
 
@@ -150,7 +156,7 @@ layer.setStyle(feature => {
     </code></pre>
   </div>
   <div>
-    <h1>Mapbox Style
+    <h1>mapbox style
       <br>(not only vector tiles 😲)
     </h1>
     <pre><code>
@@ -173,7 +179,7 @@ olms('map', 'https://api.maptiler.com/maps/bright/style.json');
 
   <!-- Tim -->
   <div>
-    <h1>GeoTIFF Sources 🎉</h1>
+    <h1>geotiff sources 🎉</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -186,7 +192,7 @@ const source = new GeoTIFF({
   </div>
 
   <div>
-    <h1>GeoTIFF Sources 🎉</h1>
+    <h1>geotiff sources 🎉</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -205,7 +211,7 @@ const source = new GeoTIFF({
   </div>
 
   <div>
-    <h1>Pixel Data 🌱</h1>
+    <h1>pixel data 🌱</h1>
     <pre><code>
 map.on('pointermove', event => {
   // this next line is the new part!
@@ -217,7 +223,7 @@ map.on('pointermove', event => {
   </div>
 
   <div>
-    <h1>Resolving Views 🌱</h1>
+    <h1>resolving views 🌱</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -254,7 +260,7 @@ const map = new Map({
 
   <!-- Andreas -->
   <div>
-    <h1>WebGL Points 🚀</h1>
+    <h1>webgl points 🚀</h1>
     <pre><code>
 import WebGLPointsLayer from 'ol/layer/WebGLPoints';
 
@@ -273,7 +279,7 @@ new WebGLPointsLayer({
   </div>
 
   <div>
-    <h1>WebGL Points<br>(attribute math)</h1>
+    <h1>webgl points<br>(attribute math)</h1>
     <pre><code>
 const size = ['^', ['get', 'mass'], 0.2];
 const minYear = 1850;
@@ -284,7 +290,7 @@ const opacity = ['/', delta, maxYear - minYear];
   </div>
 
   <div>
-    <h1>WebGL Points<br>(variables and filters)</h1>
+    <h1>webgl points<br>(variables and filters)</h1>
     <pre><code>
 const periodEnd = ['var', 'currentYear'];
 const periodStart = ['-', periodEnd, 10];
@@ -304,7 +310,7 @@ const style = {
 
   <!-- Tim -->
   <div>
-    <h1>WebGL Tiles
+    <h1>webgl tiles
       <br>(band math)
     </h1>
     <pre><code>
@@ -318,7 +324,7 @@ const ndvi = ['/', diff, sum];
   </div>
 
   <div>
-    <h1>WebGL Tiles
+    <h1>webgl tiles
       <br>(style expressions)
     </h1>
     <pre><code>
@@ -340,7 +346,7 @@ const layer = new TileLayer({
   </div>
 
   <div>
-    <h1>WebGL Tiles
+    <h1>webgl tiles
       <br>(variables)
     </h1>
     <pre><code>
@@ -359,7 +365,7 @@ const style = {
   </div>
 
   <div>
-    <h1>WebGL Tiles
+    <h1>webgl tiles
       <br>(variables)
     </h1>
     <pre><code>
