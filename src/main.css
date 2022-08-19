@@ -39,3 +39,7 @@ div.slide {
 ul {
   list-style-type: circle;
 }
+
+li + li {
+  margin-top: 0.25em;
+}

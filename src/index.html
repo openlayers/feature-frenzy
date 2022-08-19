@@ -43,6 +43,13 @@ npm start
   </div>
 
   <div>
+    <img src="./data/website.png">
+  </div>
+  <div>
+    <img src="./data/website-docs.png">
+  </div>
+
+  <div>
     <h1>new in ol@7 🎉</h1>
     <ul>
       <li>new webgl vector renderer</li>
@@ -106,6 +113,16 @@ layer.setStyle({
   'stroke-color': 'red',
   'stroke-width': 5,
 });
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>link interaction 🌱</h1>
+    <pre><code>
+import Link from 'ol/interaction/Link';
+
+// sync map state with the URL
+map.addInteraction(new Link());
     </code></pre>
   </div>
 
@@ -211,19 +228,7 @@ const source = new GeoTIFF({
   </div>
 
   <div>
-    <h1>pixel data 🌱</h1>
-    <pre><code>
-map.on('pointermove', event => {
-  // this next line is the new part!
-  layer.getData(event.pixel);
-  // do something with the pixel data
-  console.log(data);
-});
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>resolving views 🌱</h1>
+    <h1>resolving views 🪄</h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -232,20 +237,39 @@ const source = new GeoTIFF(options);
 const map = new Map({
   target: 'container',
   layers: [new TileLayer({source})],
-  // this next line is the new part!
   view: source.getView(),
 });
     </code></pre>
   </div>
 
   <div>
-    <h1>TODO</h1>
-    <ul>
-      <li>loadstart/loadend</li>
-      <li>link interaction</li>
-    </ul>
+    <h1>pixel data 🌱</h1>
+    <pre><code>
+map.on('pointermove', event => {
+
+  // this next line is the new part!
+  layer.getData(event.pixel);
+
+  // do something with the pixel data
+  console.log(data);
+});
+    </code></pre>
   </div>
 
+  <div>
+    <h1>map load events 🌱</h1>
+    <pre><code>
+const element = map.getTargetElement();
+
+map.on('loadstart', () => {
+  element.classList.add('spinner');
+});
+
+map.on('loadend', () => {
+  element.classList.remove('spinner');
+});
+    </code></pre>
+  </div>
 
   <!-- Andreas -->
 

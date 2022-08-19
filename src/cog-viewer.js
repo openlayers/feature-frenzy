@@ -4,8 +4,8 @@ import TileLayer from 'ol/layer/WebGLTile.js';
 
 const images = [
   {
-    name: 'Buenos Aires',
-    base: 'https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/21/H/UB/2021/9/S2B_21HUB_20210915_0_L2A',
+    name: 'Florence',
+    base: 'https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/32/T/PP/2022/7/S2B_32TPP_20220722_0_L2A',
   },
   {
     name: 'Minneapolis',
@@ -118,3 +118,13 @@ function displayPixelValue(event) {
   info.textContent = lines.join('\n');
 }
 map.on(['pointermove', 'click'], displayPixelValue);
+
+const element = map.getTargetElement();
+
+map.on('loadstart', () => {
+  element.classList.add('spinner');
+});
+
+map.on('loadend', () => {
+  element.classList.remove('spinner');
+});
