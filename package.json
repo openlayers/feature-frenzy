@@ -19,6 +19,7 @@
     }
   },
   "dependencies": {
+    "buffer": "^6.0.3",
     "colormap": "^2.3.2",
     "drag-drop": "^7.2.0",
     "highlight.js": "^11.6.0",

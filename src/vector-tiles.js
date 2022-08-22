@@ -5,32 +5,35 @@ import VectorTileLayer from 'ol/layer/VectorTile';
 import View from 'ol/View';
 import dragdrop from 'drag-drop/buffer';
 import olms from 'ol-mapbox-style';
-import {fromLonLat} from 'ol/proj';
+import {Buffer} from 'buffer';
+import {defaults} from 'ol/control/defaults.js';
+
+/* global globalThis */
+globalThis.Buffer = Buffer;
 
 const map = new Map({
   target: 'map-container',
   view: new View({
-    center: fromLonLat([-34.603333, -58.381667].reverse()),
-    zoom: 16,
+    center: [1537187, 5963076],
+    zoom: 17,
   }),
+  controls: defaults({attributionOptions: {collapsible: false}}),
 });
 
-olms(
-  map,
-  'https://api.maptiler.com/maps/bright/style.json?key=lirfd6Fegsjkvs0lshxe'
-);
+olms(map, '/data/cadastre-surveying.json');
 
 function declutter(declutter) {
   const layers = map.getLayers();
-  const layer = layers.item(layers.getLength() - 1);
-  map.removeLayer(layer);
-  map.addLayer(
-    new VectorTileLayer({
-      source: layer.getSource(),
-      style: layer.getStyle(),
-      declutter: declutter,
-    })
-  );
+  layers.forEach((layer, i) => {
+    layers.setAt(
+      i,
+      new VectorTileLayer({
+        source: layer.getSource(),
+        style: layer.getStyle(),
+        declutter: declutter,
+      })
+    );
+  });
 }
 
 document.getElementById('clutter').addEventListener('click', function () {
@@ -38,6 +41,18 @@ document.getElementById('clutter').addEventListener('click', function () {
 });
 document.getElementById('declutter').addEventListener('click', function () {
   declutter(true);
+  map.getView().animate({
+    center: [1537187, 5963076],
+    zoom: 17,
+    duration: 500,
+  });
+});
+document.getElementById('richtext').addEventListener('click', function () {
+  map.getView().animate({
+    center: [1661881, 5879970],
+    zoom: 19,
+    duration: 500,
+  });
 });
 
 dragdrop('#map-container', function (files) {
@@ -58,10 +73,9 @@ overlayDiv.addEventListener('click', function () {
 
 map.on('click', function (e) {
   const features = map.getFeaturesAtPixel(e.pixel);
-  if (features && features[0].get('class')) {
+  if (features) {
     overlay.setPosition(e.coordinate);
-    overlayDiv.innerHTML =
-      features[0].get('layer') + ' ' + features[0].get('class');
+    overlayDiv.innerHTML = features[0].get('layer');
   } else {
     overlay.setPosition();
   }

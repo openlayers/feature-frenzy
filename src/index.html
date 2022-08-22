@@ -73,8 +73,8 @@ npm start
   </div>
 
   <div>
-    <h1>low level style api</h1>
-    <h2>with default shaders for common use cases</h2>
+    <h1>low level style api<br>
+    with default shaders for common use cases</h1>
     <pre><code>
 import Layer from 'ol/layer/Layer.js';
 import VectorLayerRenderer from 'ol/renderer/webgl/VectorLayer.js';
@@ -128,8 +128,8 @@ const FILL_VERTEX_SHADER = `
   </div>
 
   <div>
-    <h1>low level style api</h1>
-    <h2>building blocks</h2>
+    <h1>low level style api<br>
+    building blocks</h1>
     <pre><code>
 import VectorLayerRenderer from 'ol/renderer/webgl/VectorLayer.js';
 
@@ -156,7 +156,7 @@ new VectorLayerRenderer(this, {
   </div>
 
   <div>
-    <h1>graticule</h1>
+    <h1>graticule 🌍</h1>
     <pre><code>
 import Graticule from 'ol/Graticule.js';
 
@@ -226,7 +226,8 @@ map.addInteraction(new Link());
   <!-- Andreas -->
 
   <div>
-    <h1>vector tiles</h1>
+    <h1>vector tiles<br>
+    single vectortile source</h1>
     <pre><code>
 import MapboxVectorLayer from 'ol/layer/MapboxVector';
 
@@ -238,57 +239,51 @@ new MapboxVectorLayer({
   </div>
 
   <div>
-    <h1>decluttered labels
-      <br>and symbols
-    </h1>
+    <h1>ol-mapbox-style<br>
+      vector, geojson and raster 😲</h1>
+    <pre><code>
+import {apply} 'ol-mapbox-style';
+import LayerGroup from 'ol/layer/Group.js';
+
+apply(map, 'https://api.maptiler.com/maps/topo/style.json');
+    </code></pre>
+    <p>can also <code>apply</code> to an <code>ol/layer/Group</code> 🌱</p>
+  </div>
+
+  <div>
+    <h1>label and symbol decluttering<br>
+    also per-style 🌱</h1>
     <pre><code>
 import VectorTileLayer from 'ol/layer/VectorTile';
-import VectorLayer from 'ol/layer/Vector';
 
-const vectorTile = new VectorTileLayer({
-  declutter: true
-});
-
-const vector = new VectorLayer({
-  declutter: true
-});
-    </code></pre>
-  </div>
-  <div>
-    <h1>labels along lines</h1>
-    <pre><code>
-import {Style, Text} from 'ol/style';
-
-layer.setStyle(feature => {
-  return new Style({
-    text: new Text({
-      placement: 'line',
-      text: feature.get('name'),
-    }),
-  });
+new VectorTileLayer({
+  declutter: true,
+  style: {
+    'icon-declutter-mode': 'none', // or 'obstacle'
+    'icon-src': '/data/icon.png',
+  };
 });
     </code></pre>
   </div>
-  <div>
-    <h1>mapbox style
-      <br>(not only vector tiles 😲)
-    </h1>
-    <pre><code>
-import olms 'ol-mapbox-style';
 
-olms('map', 'https://api.maptiler.com/maps/bright/style.json');
+  <div>
+    <h1>rich text style 🌱</h1>
+    <pre><code>
+textStyle.setText([
+  feature.getId(),
+  'bold 13px Calibri,sans-serif',
+  ` ${feature.get('name')}`,
+  '',
+  '\n',
+  '',
+  `${feature.get('kWp')} kWp`,
+  'italic 11px Calibri,sans-serif',
+])
     </code></pre>
   </div>
 
   <div style="width: 100%; height: 100%;">
     <iframe src="./vector-tiles.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
-  </div>
-
-  <div>
-    <h1>TODO</h1>
-    <ul>
-      <li>rich text style</li>
-    </ul>
   </div>
 
   <!-- Tim -->

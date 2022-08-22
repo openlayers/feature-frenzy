@@ -1,0 +1,1288 @@
+{
+  "version": 8,
+  "name": "Kataster",
+  "glyphs": "mapbox://fonts/openmaptiles/{fontstack}/{range}.pbf",
+  "sprite": "https://kataster.bev.gv.at/styles/sprite",
+  "sources": {
+    "kataster": {
+      "type": "vector",
+      "url": "https://kataster.bev.gv.at/styles/kataster/tiles.json"
+    },
+    "symbole": {
+      "type": "vector",
+      "url": "https://kataster.bev.gv.at/styles/symbole/tiles.json"
+    }
+  },
+  "layers": [
+    {
+      "id": "Nutzungen - Flächen",
+      "type": "fill",
+      "source": "kataster",
+      "source-layer": "nfl",
+      "paint": {
+        "fill-color": "rgba(0, 0, 0, 0)"
+      }
+    },
+    {
+      "id": "Grundstücke - Flächen",
+      "type": "fill",
+      "source": "kataster",
+      "source-layer": "gst",
+      "minzoom": 14,
+      "paint": {
+        "fill-color": "white",
+        "fill-opacity": 0.49
+      }
+    }, 
+    {
+      "id": "Nutzungen - der Rest",
+      "type": "line",
+      "source": "kataster",
+      "source-layer": "nfl",
+      "filter": [
+        "!=",
+        "ns",
+        41
+      ],
+      "minzoom": 14,
+      "paint": {
+        "line-color": "#00ff00",
+        "line-width": 0.5
+      }
+    },
+    {
+      "id": "Gebäudenutzung",
+      "type": "line",
+      "source": "kataster",
+      "source-layer": "nfl",
+      "filter": [
+        "==",
+        "ns",
+        41
+      ],
+      "minzoom": 14,
+      "paint": {
+        "line-color": "#ff0000",
+        "line-width": 1.0
+      }
+    },
+    {
+      "id": "Grundstücke",
+      "type": "line",
+      "source": "kataster",
+      "source-layer": "gst",
+      "minzoom": 14,
+      "paint": {
+        "line-color": "black",
+        "line-width": 1
+      }
+    },
+    {
+      "id": "Katastralgemeinde - Flächen",
+      "type": "fill",
+      "source": "kataster",
+      "source-layer": "kg",
+      "paint": {
+        "fill-outline-color": "orange",
+        "fill-color": "rgba(0, 0, 0, 0)"
+      }
+    },
+    {
+      "id": "Gemeinde - Flächen",
+      "type": "fill",
+      "source": "kataster",
+      "source-layer": "pg",
+      "minzoom": 6,
+      "paint": {
+        "fill-color": "rgba(0, 0, 0, 0)"
+      }
+    },
+    {
+      "id": "Gemeinde",
+      "type": "line",
+      "source": "kataster",
+      "source-layer": "pg",
+      "minzoom": 6,
+      "paint": {
+        "line-color": "red",
+        "line-width": 1.25
+      }
+    },
+    {
+      "id": "Bundesland - Flächen",
+      "type": "fill",
+      "source": "kataster",
+      "source-layer": "bl",
+      "paint": {
+        "fill-color": "rgba(0, 0, 0, 0)"
+      }
+    },
+    {
+      "id": "Bundesland",
+      "type": "line",
+      "source": "kataster",
+      "source-layer": "bl",
+      "paint": {
+        "line-width": 2,
+        "line-color": "purple"
+      }
+    },
+    {
+      "id": "Bundeslandname",
+      "type": "symbol",
+      "source": "kataster",
+      "source-layer": "blp",
+      "maxzoom": 8,
+      "layout": {
+        "text-field": "{bl}",
+        "text-size": 14,
+        "text-font": [
+          "Roboto Bold"
+        ]
+      },
+      "paint": {
+        "text-color": "purple",
+        "text-halo-color": "#FFFFFF",
+        "text-halo-width": 0.8
+      }
+    },
+    {
+      "id": "Gemeindename",
+      "type": "symbol",
+      "source": "kataster",
+      "source-layer": "pgp",
+      "minzoom": 8,
+      "maxzoom": 11,
+      "layout": {
+        "text-field": "{pg}",
+        "text-size": 14,
+        "text-font": [
+          "Roboto Bold"
+        ]
+      },
+      "paint": {
+        "text-color": "red",
+        "text-halo-color": "#FFFFFF",
+        "text-halo-width": 0.8
+      }
+    },
+    {
+      "id": "KG-Name",
+      "type": "symbol",
+      "source": "kataster",
+      "source-layer": "kgp",
+      "minzoom": 11,
+      "maxzoom": 16,
+      "layout": {
+
+        "text-field": "{kg} \n ({kg_nr})",
+        "text-size": 14,
+        "text-font": [
+          "Roboto Bold"
+        ]
+      },
+      "paint": {
+        "text-color": "orange",
+        "text-halo-color": "#FFFFFF",
+        "text-halo-width": 0.8
+      }
+    },
+
+    {
+      "id": "Grundstücksnummern (Grenzkataster) klein",
+      "type": "symbol",
+      "source": "kataster",
+      "source-layer": "gnr",
+      "minzoom": 16,
+      "maxzoom": 18,
+      "filter": [
+        "==",
+        "rstatus",
+        "G"
+      ],
+      "layout": {
+        "icon-image": "gk_underline",
+        "icon-size": 0.3,
+        "icon-rotate": ["*", -1, ["get", "rot"]],
+        "text-field": "{gnr}",
+        "text-size": 10,
+        "text-rotate": ["*", -1, ["get", "rot"]],
+        "text-font": [
+          "Arial Unicode MS Regular"
+        ],
+        "text-offset": [
+          0,
+          -0.7
+        ]
+      },
+      "paint": {
+        "text-color": "#000000",
+        "text-halo-color": "#FFFFFF",
+        "text-halo-width": 5
+      }
+    },
+    {
+      "id": "Grundstücksnummern (Grundsteuerkataster) klein",
+      "type": "symbol",
+      "source": "kataster",
+      "source-layer": "gnr",
+      "minzoom": 16,
+      "maxzoom": 18,
+      "filter": [
+        "==",
+        "rstatus",
+        "E"
+      ],
+      "layout": {
+        "text-field": "{gnr}",
+        "text-size": 10,
+        "text-rotate": ["*", -1, ["get", "rot"]],
+        "text-font": [
+          "Arial Unicode MS Regular"
+        ]
+      },
+      "paint": {
+        "text-color": "#000000",
+        "text-halo-color": "#FFFFFF",
+        "text-halo-width": 5
+      }
+    },
+
+    {
+      "id": "Grundstücksnummern (Grenzkataster) gross",
+      "type": "symbol",
+      "source": "kataster",
+      "source-layer": "gnr",
+      "minzoom": 18,
+      "filter": [
+        "==",
+        "rstatus",
+        "G"
+      ],
+      "layout": {
+        "icon-image": "gk_underline",
+        "icon-size": 0.3,
+        "icon-rotate": ["*", -1, ["get", "rot"]],
+        "text-field": "{gnr}",
+        "text-size": 16,
+        "text-rotate": ["*", -1, ["get", "rot"]],
+        "text-font": [
+          "Arial Unicode MS Regular"
+        ],
+        "text-offset": [
+          0,
+          -0.6
+        ]
+      },
+      "paint": {
+        "text-color": "#000000",
+        "text-halo-color": "#FFFFFF",
+        "text-halo-width": 5
+      }
+    },
+    {
+      "id": "Grundstücksnummern (Grundsteuerkataster) gross",
+      "type": "symbol",
+      "source": "kataster",
+      "source-layer": "gnr",
+      "minzoom": 18,
+      "filter": [
+        "==",
+        "rstatus",
+        "E"
+      ],
+      "layout": {
+        "text-field": "{gnr}",
+        "text-size": 16,
+        "text-rotate": ["*", -1, ["get", "rot"]],
+        "text-font": [
+          "Arial Unicode MS Regular"
+        ]
+      },
+      "paint": {
+        "text-color": "#000000",
+        "text-halo-color": "#FFFFFF",
+        "text-halo-width": 5
+      }
+    },
+    {
+      "id": "sonstige Linien", "type": "line", "source": "symbole", "source-layer": "sli", "minzoom": 15, "paint": { "line-color": "blue", "line-width": 0.5 }
+    },
+    {
+      "id": "S-Klammer", "type": "symbol", "source": "symbole", "source-layer": "ssb", "minzoom": 18, "filter": ["==", "typ", 31], "layout": { "icon-allow-overlap": true, "icon-ignore-placement": true, "icon-size": 0.7, "icon-image": "sonstiges_31", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Z-Klammer", "type": "symbol", "source": "symbole", "source-layer": "ssb", "minzoom": 18, "filter": ["==", "typ", 32], "layout": { "icon-size": 0.7, "icon-image": "sonstiges_32", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Grenzpunkt nicht gekennzeichnet (Label)",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["==", "typ", 20],
+      "minzoom": 18,
+      "maxzoom": 20,
+      "layout": { "icon-image": "gp_ohne_kennzeichnung", "icon-size": 0.5, "text-field": "{pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] }, 
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    },
+    {
+      "id": "Grenzpunkt gekennzeichnet (Label)",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["==", "typ", 24],
+      "minzoom": 18,
+      "maxzoom": 20,
+      "layout": { "icon-image": "gp_direkt", "icon-size": 0.5, "text-field": "{pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    },
+
+
+
+    {
+      "id": "Grenzpunkt detail - Grundsymbol",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["all", [ "in", ["get", "typ"], ["literal", [20, 24]]], [ "==", ["get", "kznatur"], "0"]],
+      "minzoom": 20,
+      "layout": { "icon-image": "gp_indirekt", "icon-size": 0.5, 
+      "text-field": "{pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    }, 
+      
+    {
+      "id": "Grenzpunkt detail - behauen (geformt)",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["all", [ "in", ["get", "typ"], ["literal", [20, 24]]], [ "==", ["get", "kznatur"], "9"]],
+      "minzoom": 20,
+      "layout": { 
+        "icon-image": "gp_behauen", "icon-size": 0.5, 
+        "text-field": "{pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    },  
+
+    {
+      "id": "Grenzpunkt detail - unbehauen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["all", [ "in", ["get", "typ"], ["literal", [20, 24]]], [ "==", ["get", "kznatur"], "10"]],
+      "minzoom": 20,
+      "layout": { 
+        "icon-image": "gp_unbehauen", "icon-size": 0.5, 
+        "text-field": "{pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    }, 
+
+    {
+      "id": "Grenzpunkt detail - Kreuz",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["all", [ "in", ["get", "typ"], ["literal", [20, 24]]], [ "==", ["get", "kznatur"], "131"]],
+      "minzoom": 20,
+      "layout": { 
+        "icon-image": "gp_kreuz", "icon-size": 0.5, 
+        "text-field": "KR {pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    }, 
+    
+    
+    {
+      "id": "Grenzpunkt detail - Metallrohr",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["all", [ "in", ["get", "typ"], ["literal", [20, 24]]], [ "in", ["get", "kznatur"], ["literal", ["132", "133", "134", "135", "136", "137"]]]],
+      "minzoom": 20,
+      "layout": { "icon-image": "gp_kreuz", "icon-size": 0.5, "text-field": "{pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    },
+
+
+    {
+      "id": "Grenzpunkt detail - Hausecke",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["all", [ "in", ["get", "typ"], ["literal", [20, 24]]], [ "==", ["get", "kznatur"], "138"]],
+      "minzoom": 20,
+      "layout": { 
+        "icon-image": "gp_indirekt", "icon-size": 0.5, 
+        "text-field": "HE {pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    }, 
+    
+
+    {
+      "id": "Grenzpunkt detail - Mauerecke",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["all", [ "in", ["get", "typ"], ["literal", [20, 24]]], [ "==", ["get", "kznatur"], "139"]],
+      "minzoom": 20,
+      "layout": { 
+        "icon-image": "gp_indirekt", "icon-size": 0.5, 
+        "text-field": "ME {pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    }, 
+    
+
+    {
+      "id": "Grenzpunkt detail - Zaunsäule",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["all", [ "in", ["get", "typ"], ["literal", [20, 24]]], [ "==", ["get", "kznatur"], "140"]],
+      "minzoom": 20,
+      "layout": { 
+        "icon-image": "gp_indirekt", "icon-size": 0.5, 
+        "text-field": "ZS {pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    }, 
+    
+
+    {
+      "id": "Grenzpunkt detail - Bordsteinkante",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["all", [ "in", ["get", "typ"], ["literal", [20, 24]]], [ "==", ["get", "kznatur"], "141"]],
+      "minzoom": 20,
+      "layout": { 
+        "icon-image": "gp_indirekt", "icon-size": 0.5, 
+        "text-field": "BK {pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    }, 
+    
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "id": "Grenzpunkt indirekt gekennzeichnet (Label)",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["==", "typ", 25],
+      "minzoom": 18,
+      "layout": { "icon-image": "gp_indirekt", "icon-size": 0.5, "text-field": "{pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    },
+    {
+      "id": "Grenzpunkt gekennzeichnet - keine Punktnummer (Label)",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["==", "typ", 124],
+      "minzoom": 18,
+      "layout": { "icon-image": "gp_indirekt", "icon-size": 0.5, "text-field": "{pnr}", "text-size": 11, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 3.6 }
+    },
+
+
+
+    {
+      "id": "Staatsgrenzpunkt nicht vermarkt (Label)",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["==", "typ", 220],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "sgp_ohne_vermarkung",
+        "icon-size": 0.5,
+        "text-field": [
+          "format",
+          ["get", "sgp_nr" ],
+          { "font-scale": 2, "text-color": "blue", "text-font": [ "literal", [ "Arial Unicode MS Bold Italic" ] ] },
+          "\n",
+          {},
+          ["get", "pnr" ],
+          {}
+        ],
+        "text-size": 11,
+        "text-font": [ "Arial Unicode MS Regular" ],
+        "text-anchor": "left",
+        "text-justify": "auto",
+        "text-offset": [ 0.5, 0 ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 0.6 }
+    },
+    {
+      "id": "Staatsgrenzpunkt vermarkt (Label)",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["==", "typ", 224],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "gp_direkt",
+        "icon-size": 0.5,
+        "text-field": [
+          "format",
+          ["get", "sgp_nr" ],
+          { "font-scale": 2, "text-color": "blue", "text-font": [ "literal", [ "Arial Unicode MS Italic" ] ] },
+          "\n",
+          {},
+          ["get", "pnr" ],
+          { "text-color": "blue", "text-font": [ "literal", [ "Arial Unicode MS Italic" ] ] }
+        ],
+        "text-size": 11,
+        "text-font": [ "Arial Unicode MS Regular" ],
+        "text-anchor": "left",
+        "text-justify": "auto",
+        "text-offset": [ 0.5, 0 ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 0.6 }
+    },
+    {
+      "id": "Staatsgrenzpunkt indirekt vermarkt (Label)",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "gp",
+      "filter": ["==", "typ", 225],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "gp_indirekt",
+        "icon-size": 0.5,
+        "text-field": [
+          "format",
+          ["get", "sgp_nr" ],
+          { "font-scale": 2, "text-font": [ "literal", [ "Arial Unicode MS Bold Italic" ] ] },
+          "\n",
+          {},
+          ["get", "pnr" ],
+          { "text-font": [ "literal", [ "Arial Unicode MS Bold Italic" ] ] }
+        ],
+        "text-size": 11,
+        "text-font": [
+          "Arial Unicode MS Regular"
+        ],
+        "text-anchor": "left",
+        "text-justify": "auto",
+        "text-offset": [ 0.5, 0 ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "#FFFFFF", "text-halo-width": 0.6 }
+    },
+    {
+      "id": "Bauwerk (Keller) unter fremden Grund",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 38],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_38", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Gebäude nicht in DKM abgebildet",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 39 ],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_39", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Kapelle",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 67 ],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_67", "icon-rotate": [ "*", -1, ["get","rot_nr"] ] }
+    },
+    {
+      "id": "Bildstock",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 68],
+      "layout": { "icon-size": 0.8, "icon-image": "sonstiges_68", "icon-rotate": [ "*", -1, ["get","rot_nr"] ] }
+    },
+    {
+      "id": "Feldkreuz, Gipfelkreuz",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": [ "==","typ", 69],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_69", "icon-rotate": [ "*", -1, ["get","rot_nr"] ] }
+    },
+    {
+      "id": "Denkmal",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 70],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_70", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Tempel, Synagoge, ...",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 71],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_71", "icon-rotate": [ "*", -1, [ "get", "rot_nr" ] ] }
+    },
+    {
+      "id": "kleiner Wasserlauf",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 76
+      ],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_76", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Leitungsmast",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 79
+      ],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_79", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Seilbahnstütze",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 81],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_81", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Kirche",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 93],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_93", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Sonstiger Punkt",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 130 ],
+      "layout": { "icon-size": 0.5, "icon-image": "sonstiges_130", "icon-rotate": [ "*", -1, ["get", "rot_nr" ] ] }
+    },
+    {
+      "id": "Sonstige Beschriftung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "ssb",
+      "minzoom": 17,
+      "filter": ["==", "typ", 200 ],
+      "layout": { "text-field": "{text}", "text-size": [ "get", "text-gr" ], "text-rotate": [ "*", -1, ["get", "rot_nr" ] ], "text-anchor": "left", "text-font": [ "Arial Unicode MS Regular" ] },
+      "paint": { "text-color": "#0000ff", "text-halo-color": "#FFFFFF", "text-halo-width": 0.6 }
+    },
+    {
+      "id": "Adresse Symbol",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "hnr",
+      "minzoom": 17,
+      "maxzoom": 19,
+      "layout": { "icon-size": 0.7, "icon-image": "adresse" }
+    },
+    {
+      "id": "Adresse Symbol Fullname",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "hnr",
+      "minzoom": 19,
+      "layout": { "icon-size": 1.2, "icon-image": "adresse" }
+    },
+    {
+      "id": "Adresse Hausnummer",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "hnr",
+      "minzoom": 17,
+      "maxzoom": 19,
+      "layout": { "text-field": "{hnr}", "text-size": 10, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.7, 0 ] },
+      "paint": { "text-color": "#ff8800", "text-halo-color": "#FFFFFF", "text-halo-width": 5 }
+    },
+    {
+      "id": "Adresse FullName",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "hnr",
+      "minzoom": 19,
+      "layout": { "text-field": "{name}", "text-size": 12, "text-font": [ "Arial Unicode MS Regular" ], "text-anchor": "left", "text-offset": [ 0.9, 0 ] },
+      "paint": { "text-color": "#ff8800", "text-halo-color": "#FFFFFF", "text-halo-width": 5 }
+    },
+    {
+      "id": "Dauerkulturanlagen oder Erwerbsgärten",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 40 ],
+      "layout": { "icon-image": "nutzung_40", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Gebäude",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 41 ],
+      "layout": { "icon-image": "nutzung_41", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.7 ] ] }
+    },
+    {
+      "id": "Parkplätze",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 42 ],
+      "layout": { "icon-image": "nutzung_42", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Äcker, Wiesen oder Weiden",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 48 ],
+      "layout": { "icon-image": "nutzung_48", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Gärten",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 52 ],
+      "layout": { "icon-image": "nutzung_52", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Weingärten",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 53 ],
+      "layout": { "icon-image": "nutzung_53", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Alpen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 54 ],
+      "layout": { "icon-image": "nutzung_54", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Krummholzflächen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 55 ],
+      "layout": { "icon-image": "nutzung_55", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Wälder",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 56 ],
+      "layout": { "icon-image": "nutzung_56", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Verbuschte Flächen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 57 ],
+      "layout": { "icon-image": "nutzung_57", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Forststraßen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 58 ],
+      "layout": { "icon-image": "nutzung_58", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Fließende Gewässer",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 59 ],
+      "layout": { "icon-image": "nutzung_59", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Stehende Gewässer",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 60 ],
+      "layout": { "icon-image": "nutzung_60", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Feuchtgebiete",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 61 ],
+      "layout": { "icon-image": "nutzung_61", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Vegetationsarme Flächen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 62 ],
+      "layout": { "icon-image": "nutzung_62", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Betriebsflächen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 63 ],
+      "layout": { "icon-image": "nutzung_63", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Gewässerrandflächen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 64 ],
+      "layout": { "icon-image": "nutzung_64", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Verkehrsrandflächen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 65 ],
+      "layout": { "icon-image": "nutzung_65", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Friedhöfe",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 72 ],
+      "layout": { "icon-image": "nutzung_72", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ]
+      }
+    },
+    {
+      "id": "Gebäudenebenflächen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 83 ],
+      "layout": { "icon-image": "nutzung_83", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Abbauflächen, Halden und Deponien",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 84 ],
+      "layout": { "icon-image": "nutzung_84", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Fels- und Geröllflächen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 87 ],
+      "layout": { "icon-image": "nutzung_87", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Gletscher",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 88 ],
+      "layout": { "icon-image": "nutzung_88", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Schienenverkehrsanlagen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 92 ],
+      "layout": { "icon-image": "nutzung_92", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Straßenverkehrsanlagen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 95 ],
+      "layout": { "icon-image": "nutzung_95", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Freizeitflächen",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns", 96 ],
+      "layout": { "icon-image": "nutzung_96", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+    {
+      "id": "Rechtlich nicht Wald",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns_recht", 73 ],
+      "layout": { "icon-image": "rnutzung_73", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ], "icon-offset": [ -50, 0 ] }
+    },
+    {
+      "id": "Rechtlich Wald",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns_recht", 74 ],
+      "layout": { "icon-image": "rnutzung_74", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ], "icon-offset": [ -50, 0 ] }
+    },
+    {
+      "id": "Rechtlich Weingarten",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns_recht", 77 ],
+      "layout": { "icon-image": "rnutzung_77", "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ], "icon-offset": [ -50, 0 ] }
+    },
+    {
+      "id": "Rechtlich kein Weingarten",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "nsy",
+      "minzoom": 17,
+      "filter": [ "==", "ns_recht", 78 ],
+      "layout": { "icon-image": "rnutzung_78", "icon-offset": [ -50, 0 ], "icon-rotate": [ "*", -1, ["get", "rot" ] ], "icon-size": [ "*", 0.5, [ "+", [ "/", [ "-", 1, [ "get", "scale" ] ], 2 ], 0.5 ] ] }
+    },
+
+
+
+
+
+
+    {
+      "id": "TP Hauptpunkt",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "T" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "A", "B", "C", "D", "F", "G", "H", "U", "V" ] ] ] ],
+      "minzoom": 13,
+      "maxzoom": 18,
+      "layout": { 
+        "icon-image": "tp_hauptpunkt", "icon-size": 1, "text-field": "{nr}-{oek}", "text-size": 13, "text-anchor": "left", 
+        "text-offset": [ 0.7, -0.3 ], 
+        "text-font": [ "Arial Unicode MS Italic" ] 
+      },
+      "paint": { "text-color": "black", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "TP Hochpunkt",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "T" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "J", "K", "L", "M", "N", "P", "Q", "R", "S", "W" ] ] ] ],
+      "minzoom": 13,
+      "maxzoom": 18,
+      "layout": {
+        "icon-image": "tp_hochpunkt", "icon-size": 1, "text-field": "{nr}-{oek}", "text-size": 13, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "TP Kirche",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "T" ], [ "==", [ "slice", [ "get", "ue_kz" ], 0, 1 ], "T" ] ],
+      "minzoom": 13,
+      "maxzoom": 18,
+      "layout": {
+        "icon-image": "tp_kirche", "icon-size": 1, "text-field": "{nr}-{oek}", "text-size": 13, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+
+    {
+      "id": "TP Hauptpunkt mit Kennzeichnung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "T" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "A", "B", "C", "D", "F", "G", "H", "U", "V" ] ] ] ],
+      "minzoom": 18,
+      "layout": { 
+        "icon-image": "tp_hauptpunkt", "icon-size": 1, "text-field": "{nr}-{oek}{ue_kz}", "text-size": 13, "text-anchor": "left", 
+        "text-offset": [ 0.7, -0.3 ], 
+        "text-font": [ "Arial Unicode MS Italic" ] 
+      },
+      "paint": { "text-color": "red", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "TP Hochpunkt mit Kennzeichnung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "T" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "J", "K", "L", "M", "N", "P", "Q", "R", "S", "W" ] ] ] ],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "tp_hochpunkt", "icon-size": 1, "text-field": "{nr}-{oek}{ue_kz}", "text-size": 13, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "red", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "TP Kirche mit Kennzeichnung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "T" ], [ "==", [ "slice", [ "get", "ue_kz" ], 0, 1 ], "T" ] ],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "tp_kirche", "icon-size": 1, "text-field": "{nr}-{oek}{ue_kz}", "text-size": 13, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "red", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+
+
+
+
+
+
+    {
+      "id": "EP Hauptpunkt small",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "E" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "A", "B", "C", "D", "E", "F", "G", "H", "U", "V" ] ] ] ],
+      "minzoom": 13,
+      "maxzoom": 14,
+      "layout": {
+        "icon-image": "ep_hauptpunkt", "icon-size": 0.8, "text-field": "{nr}", "text-size": 11, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "white", "text-halo-width": 0.6 }
+    },
+    {
+      "id": "EP Hochpunkt small",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "E" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "J", "K", "L", "M", "N", "P", "Q", "R", "S", "W" ] ] ] ],
+      "minzoom": 13,
+      "maxzoom": 14,
+      "layout": {
+        "icon-image": "ep_hochpunkt", "icon-size": 0.8, "text-field": "{nr}", "text-size": 11, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "white", "text-halo-width": 0.6 }
+    },
+    {
+      "id": "EP Kirche small",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "E" ], [ "==", [ "slice", [ "get", "ue_kz" ], 0, 1 ], "T" ] ],
+      "minzoom": 13,
+      "maxzoom": 14,
+      "layout": {
+        "icon-image": "ep_kirche", "icon-size": 1, "text-field": "{nr}", "text-size": 11, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "white", "text-halo-width": 0.6 }
+    },
+    {
+      "id": "EP Hauptpunkt",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "E" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "A", "B", "C", "D", "E", "F", "G", "H", "U", "V" ] ] ] ],
+      "minzoom": 14,
+      "maxzoom": 18,
+      "layout": {
+        "icon-image": "ep_hauptpunkt", "icon-size": 0.8, "text-field": "{oek}-{nr}", "text-size": 11, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "EP Hochpunkt",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "E" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "J", "K", "L", "M", "N", "P", "Q", "R", "S", "W" ] ] ] ],
+      "minzoom": 14,
+      "maxzoom": 18,
+      "layout": {
+        "icon-image": "ep_hochpunkt", "icon-size": 0.8, "text-field": "{oek}-{nr}", "text-size": 11, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "EP Kirche",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "E" ], [ "==", [ "slice", [ "get", "ue_kz" ], 0, 1 ], "T" ] ],
+      "minzoom": 14,
+      "maxzoom": 18,
+      "layout": {
+        "icon-image": "ep_kirche", "icon-size": 1, "text-field": "{oek}-{nr}", "text-size": 11, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "black", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+
+   {
+      "id": "EP Hauptpunkt mit Kennzeichnung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "E" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "A", "B", "C", "D", "E", "F", "G", "H", "U", "V" ] ] ] ],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "ep_hauptpunkt", "icon-size": 0.8, "text-field": "{oek}-{nr}{ue_kz}", "text-size": 11, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "red", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "EP Hochpunkt mit Kennzeichnung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "E" ], [ "in", [ "slice", [ "get", "ue_kz" ], 0, 1 ], [ "literal", [ "J", "K", "L", "M", "N", "P", "Q", "R", "S", "W" ] ] ] ],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "ep_hochpunkt", "icon-size": 0.8, "text-field": "{oek}-{nr}{ue_kz}", "text-size": 11, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "red", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "EP Kirche mit Kennzeichnung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "fp",
+      "filter": [ "all", [ "==", ["get", "art" ], "E" ], [ "==", [ "slice", [ "get", "ue_kz" ], 0, 1 ], "T" ] ],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "ep_kirche", "icon-size": 1, "text-field": "{oek}-{nr}{ue_kz}", "text-size": 11, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "red", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+
+
+
+
+
+
+
+    {
+      "id": "TP Hauptpunkt Stabilisierung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "stab",
+      "filter": [ "all", [ "!=", ["get", "is_main" ], "true" ], [ "in", [ "slice", [ "get", "kz" ], 0, 1 ], [ "literal", [ "A", "B", "C", "D", "F", "G", "H", "U", "V" ] ] ] ],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "tp_hauptpunkt", "icon-size": 0.7, "text-field": "{kz}", "text-size": 10, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "red", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "TP Hochpunkt Stabilisierung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "stab",
+      "filter": [ "all", [ "!=", ["get", "is_main" ], "true" ], [ "in", [ "slice", [ "get", "kz" ], 0, 1 ], [ "literal", [ "J", "K", "L", "M", "N", "P", "Q", "R", "S", "W" ] ] ] ],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "tp_hochpunkt", "icon-size": 0.7, "text-field": "{kz}", "text-size": 10, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "red", "text-halo-color": "white", "text-halo-width": 5 }
+    },
+    {
+      "id": "TP Kirche Stabilisierung",
+      "type": "symbol",
+      "source": "symbole",
+      "source-layer": "stab",
+      "filter": [ "all", [ "!=", ["get", "is_main" ], "true" ], [ "==", [ "slice", [ "get", "kz" ], 0, 1 ], "T" ] ],
+      "minzoom": 18,
+      "layout": {
+        "icon-image": "tp_kirche", "icon-size": 0.7, "text-field": "{kz}", "text-size": 10, "text-anchor": "left",
+        "text-offset": [ 0.7, -0.3 ],
+        "text-font": [ "Arial Unicode MS Italic" ]
+      },
+      "paint": { "text-color": "red", "text-halo-color": "white", "text-halo-width": 5 }
+    }
+  ]
+}
