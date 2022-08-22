@@ -383,26 +383,38 @@ map.on('loadend', () => {
     </ul>
   </div>
 
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./mixed-renderers.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <div>
+    <h1>dom element structure</h1>
+    <pre><code>
+&lt;div class="ol-layers">&lt;/div>
+  &lt;div class="ol-layer">&lt;/div>
+  &lt;div class="svg-layer">&lt;/div>
+  &lt;canvas class="webgl-layer">&lt;/canvas>
+&lt;/div>
+    </code></pre>
+  </div>
+
   <div>
     <h1>custom renderer 🚀<br>interactive svg</h1>
     <pre><code>
-import layer from 'ol/layer/Vector';
+import Layer from 'ol/layer/Layer.js';
+
+const container = document.createElement('div');
+fetch(url)
+  .then(response => response.text())
+  .then(svg => {
+    container.innerHTML = svg;
+  });
 
 const svgLayer = new Layer({
   render(frameState) {
-    const scale = svgResolution / frameState.viewState.resolution;
-    const center = frameState.viewState.center;
-    const size = frameState.size;
-    const cssTransform = composeCssTransform(
-      size[0] / 2, size[1] / 2,
-      scale, scale,
-      frameState.viewState.rotation,
-      -center[0] / svgResolution - width / 2,
-      center[1] / svgResolution - height / 2
-    );
-    svgContainer.style.transform = cssTransform;
-    svgContainer.style.opacity = this.getOpacity();
-    return svgContainer;
+    // transform container to match frameState
+    // (center, resolution, size)
+    return container;
   },
 });
     </code></pre>
@@ -417,25 +429,17 @@ new WebGLPointsLayer({
   className: 'webgl-layer',
   source: source,
   style: {
-    variables: styleVariables,
-    filter: ['between', ['get', 'year'], periodStart, ['var', 'currentYear']],
+    variables, // contains the current year of the animation
+    filter, // only points within 10 years back from current year,
     symbol: {
       symbolType: 'circle',
-      size: [
-        '*',
-        decay,
-        ['+', ['*', ['clamp', ['*', ['get', 'mass'], 1 / 20000], 0, 1], 18], 8],
-      ],
+      size, // size based on mass of the meteorite and decay
       color: 'rgb(255, 0, 0)',
       opacity: ['*', 0.5, decay],
     },
   },
 });
     </code></pre>
-  </div>
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./mixed-renderers.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
   </div>
 
   <!-- Tim -->

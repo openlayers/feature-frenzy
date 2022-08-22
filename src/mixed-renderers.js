@@ -13,17 +13,15 @@ import {fromLonLat, get} from 'ol/proj';
 import {getWidth} from 'ol/extent';
 
 const svgContainer = document.createElement('div');
-const xhr = new XMLHttpRequest();
-xhr.open(
-  'GET',
-  'https://ahocevar.com/geoserver/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fsvg&TRANSPARENT=true&LAYERS=ne%3Ane&CRS=EPSG%3A3857&STYLES=&FORMAT_OPTIONS=dpi%3A90&WIDTH=3000&HEIGHT=3000&BBOX=-20037508.342789244%2C-20037508.342789244%2C20037508.342789244%2C20037508.342789244'
-);
-xhr.addEventListener('load', function () {
-  const svg = xhr.responseXML.documentElement;
-  svgContainer.ownerDocument.importNode(svg);
-  svgContainer.appendChild(svg);
-});
-xhr.send();
+
+const url =
+  'https://ahocevar.com/geoserver/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fsvg&TRANSPARENT=true&LAYERS=ne%3Ane&CRS=EPSG%3A3857&STYLES=&FORMAT_OPTIONS=dpi%3A90&WIDTH=3000&HEIGHT=3000&BBOX=-20037508.342789244%2C-20037508.342789244%2C20037508.342789244%2C20037508.342789244';
+
+fetch(url)
+  .then((response) => response.text())
+  .then((svg) => {
+    svgContainer.innerHTML = svg;
+  });
 
 const width = 3000;
 const height = 3000;
