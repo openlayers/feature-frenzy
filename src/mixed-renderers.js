@@ -1,10 +1,58 @@
 import 'ol/ol.css';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
+import {
+  Layer,
+  Tile as TileLayer,
+  WebGLPoints as WebGLPointsLayer,
+} from 'ol/layer';
 import {Map, View} from 'ol';
-import {Tile as TileLayer, WebGLPoints as WebGLPointsLayer} from 'ol/layer';
 import {Vector as VectorSource, XYZ} from 'ol/source';
-import {fromLonLat} from 'ol/proj';
+import {composeCssTransform} from 'ol/transform';
+import {fromLonLat, get} from 'ol/proj';
+import {getWidth} from 'ol/extent';
+
+const svgContainer = document.createElement('div');
+const xhr = new XMLHttpRequest();
+xhr.open(
+  'GET',
+  'https://ahocevar.com/geoserver/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fsvg&TRANSPARENT=true&LAYERS=ne%3Ane&CRS=EPSG%3A3857&STYLES=&FORMAT_OPTIONS=dpi%3A90&WIDTH=3000&HEIGHT=3000&BBOX=-20037508.342789244%2C-20037508.342789244%2C20037508.342789244%2C20037508.342789244'
+);
+xhr.addEventListener('load', function () {
+  const svg = xhr.responseXML.documentElement;
+  svgContainer.ownerDocument.importNode(svg);
+  svgContainer.appendChild(svg);
+});
+xhr.send();
+
+const width = 3000;
+const height = 3000;
+const svgResolution = getWidth(get('EPSG:3857').getExtent()) / width;
+svgContainer.style.width = width + 'px';
+svgContainer.style.height = height + 'px';
+svgContainer.style.transformOrigin = 'top left';
+svgContainer.style.position = 'absolute';
+svgContainer.className = 'svg-layer';
+
+const svgLayer = new Layer({
+  render: function (frameState) {
+    const scale = svgResolution / frameState.viewState.resolution;
+    const center = frameState.viewState.center;
+    const size = frameState.size;
+    const cssTransform = composeCssTransform(
+      size[0] / 2,
+      size[1] / 2,
+      scale,
+      scale,
+      frameState.viewState.rotation,
+      -center[0] / svgResolution - width / 2,
+      center[1] / svgResolution - height / 2
+    );
+    svgContainer.style.transform = cssTransform;
+    svgContainer.style.opacity = this.getOpacity();
+    return svgContainer;
+  },
+});
 
 const meteoriteUrl = new URL('./data/meteorites.csv', import.meta.url);
 
@@ -68,32 +116,22 @@ const decay = [
 //! [expressions]
 
 const meteorites = new WebGLPointsLayer({
+  className: 'webgl-layer',
   source: source,
   style: {
-    //! [variables]
     variables: styleVariables,
-    //! [variables]
-    //! [filter]
     filter: ['between', ['get', 'year'], periodStart, ['var', 'currentYear']],
-    //! [filter]
     symbol: {
       symbolType: 'circle',
-      //! [size]
       size: [
         '*',
         decay,
         ['+', ['*', ['clamp', ['*', ['get', 'mass'], 1 / 20000], 0, 1], 18], 8],
       ],
-      //! [size]
       color: 'rgb(255, 0, 0)',
-      //! [opacity]
       opacity: ['*', 0.5, decay],
-      //! [opacity]
     },
   },
-  //! [hitdetection]
-  disableHitDetection: true,
-  //! [hitdetection]
 });
 
 //! [declaration]
@@ -104,9 +142,10 @@ const map = new Map({
     new TileLayer({
       source: new XYZ({
         crossOrigin: 'anonymous',
-        url: 'https://stamen-tiles-{a-d}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg',
+        url: 'https://stamen-tiles-{a-d}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg',
       }),
     }),
+    svgLayer,
     meteorites,
   ],
   view: new View({

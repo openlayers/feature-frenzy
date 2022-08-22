@@ -366,62 +366,76 @@ map.on('loadend', () => {
   <!-- Andreas -->
 
   <div>
-    <h1>TODO</h1>
+    <h1>map composition history</h1>
     <ul>
-      <li>mixed rendering tech</li>
-      <li>svg world over webgl tiles</li>
-      <li>share renderers when possible</li>
+      <li>until v5: everything rendered to a single canvas</li>
+      <li>early v6: each layer rendered to its own canvas</li>
+      <li>mid v6: combine canvas2d outputs when fully opaque, same resolution and same rotation technique</li>
+      <li>late v6: combine all adjacent canvas2d outputs</li>
     </ul>
   </div>
 
-  <!-- Andreas -->
   <div>
-    <h1>webgl points 🚀</h1>
-    <pre><code>
-import WebGLPointsLayer from 'ol/layer/WebGLPoints';
+    <h1>splitting and mixing renderers</h1>
+    <ul>
+      <li><code>className</code> configured on adjacent layers splits outputs</li>
+      <li>mixing renderers (canvas2d, webgl, custom) splits outputs</li>
+    </ul>
+  </div>
 
-new WebGLPointsLayer({
-  source: vectorSource,
-  style: {
-    symbol: {
-      symbolType: 'circle',
-      color: 'red',
-      size: 12,
-      opacity: 1
-    }
-  }
+  <div>
+    <h1>custom renderer 🚀<br>interactive svg</h1>
+    <pre><code>
+import layer from 'ol/layer/Vector';
+
+const svgLayer = new Layer({
+  render(frameState) {
+    const scale = svgResolution / frameState.viewState.resolution;
+    const center = frameState.viewState.center;
+    const size = frameState.size;
+    const cssTransform = composeCssTransform(
+      size[0] / 2, size[1] / 2,
+      scale, scale,
+      frameState.viewState.rotation,
+      -center[0] / svgResolution - width / 2,
+      center[1] / svgResolution - height / 2
+    );
+    svgContainer.style.transform = cssTransform;
+    svgContainer.style.opacity = this.getOpacity();
+    return svgContainer;
+  },
 });
     </code></pre>
   </div>
 
   <div>
-    <h1>webgl points<br>(attribute math)</h1>
+    <h1>webgl points layer<br>style expressions</h1>
     <pre><code>
-const size = ['^', ['get', 'mass'], 0.2];
-const minYear = 1850;
-const maxYear = 2015;
-const delta = ['-', maxYear, ['get', 'year']];
-const opacity = ['/', delta, maxYear - minYear];
-    </code></pre>
-  </div>
+import WebGLPointsLayer from 'ol/layer/WebGLPoints.js';
 
-  <div>
-    <h1>webgl points<br>(variables and filters)</h1>
-    <pre><code>
-const periodEnd = ['var', 'currentYear'];
-const periodStart = ['-', periodEnd, 10];
-const style = {
-  variables: {currentYear: 1950},
-  filter: [
-    'between', ['get', 'year'], periodStart, periodEnd
-  ],
-  // ...
-};
+new WebGLPointsLayer({
+  className: 'webgl-layer',
+  source: source,
+  style: {
+    variables: styleVariables,
+    filter: ['between', ['get', 'year'], periodStart, ['var', 'currentYear']],
+    symbol: {
+      symbolType: 'circle',
+      size: [
+        '*',
+        decay,
+        ['+', ['*', ['clamp', ['*', ['get', 'mass'], 1 / 20000], 0, 1], 18], 8],
+      ],
+      color: 'rgb(255, 0, 0)',
+      opacity: ['*', 0.5, decay],
+    },
+  },
+});
     </code></pre>
   </div>
 
   <div style="width: 100%; height: 100%;">
-    <iframe src="./webgl-points.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+    <iframe src="./mixed-renderers.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
   </div>
 
   <!-- Tim -->

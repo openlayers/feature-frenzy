@@ -2,9 +2,15 @@
 <html>
 
 <head>
-  <title>WebGL Points</title>
+  <title>Mixed renderers</title>
   <link rel="stylesheet" href="./style.css">
   <style>
+    .svg-layer path:hover {
+      opacity: 0.1;
+    }
+    .webgl-layer {
+      pointer-events: none !important;
+    }
     #year {
       position: absolute;
       top: 1em;
@@ -21,7 +27,7 @@
 <body>
   <div id="map-container"></div>
   <div id="year"></div>
-  <script type="module" src="./webgl-points.js"></script>
+  <script type="module" src="./mixed-renderers.js"></script>
 </body>
 
 </html>
