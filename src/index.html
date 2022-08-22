@@ -61,11 +61,108 @@ npm start
   <!-- Andreas -->
 
   <div>
-    <h1>TODO</h1>
+    <h1>webgl vector rendering 🚀</h1>
     <ul>
-      <li>webgl vector rendering</li>
-      <li>graticule</li>
+      <li>points, lines and polygons</li>
+      <li>for untiled vector data</li>
     </ul>
+  </div>
+
+  <div style="width: 100%; height: 100%;">
+    <iframe src="./webgl-vectors.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+
+  <div>
+    <h1>low level style api</h1>
+    <h2>with default shaders for common use cases</h2>
+    <pre><code>
+import Layer from 'ol/layer/Layer.js';
+import VectorLayerRenderer from 'ol/renderer/webgl/VectorLayer.js';
+import {packColor} from 'ol/renderer/webgl/shaders.js';
+
+class WebGLLayer extends Layer {
+  createRenderer() {
+    return new VectorLayerRenderer(this, {
+      fill: {
+        attributes: {
+          color: (feature) => packColor(feature.get('color')),
+          opacity: () => 0.6,
+        },
+      },
+      stroke: {
+        attributes: {
+          color: () => packColor([0, 0, 0, 1]),
+          width: () => 3,
+        },
+      },
+    });
+  }
+}
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>default vertex shader (fill)</h1>
+    <pre><code>
+const DECODE_COLOR_EXPRESSION = `vec3(
+  fract(floor(a_color / 256.0 / 256.0) / 256.0),
+  fract(floor(a_color / 256.0) / 256.0),
+  fract(a_color / 256.0)
+);`;
+
+const FILL_VERTEX_SHADER = `
+  precision mediump float;
+  uniform mat4 u_projectionMatrix;
+  attribute vec2 a_position;
+  attribute float a_color;
+  attribute float a_opacity;
+  varying vec3 v_color;
+  varying float v_opacity;
+
+  void main(void) {
+    gl_Position = u_projectionMatrix * vec4(a_position, 0.0, 1.0);
+    v_color = ${DECODE_COLOR_EXPRESSION}
+    v_opacity = a_opacity;
+  }`;
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>low level style api</h1>
+    <h2>building blocks</h2>
+    <pre><code>
+import VectorLayerRenderer from 'ol/renderer/webgl/VectorLayer.js';
+
+new VectorLayerRenderer(this, {
+  fill: {
+    vertexShader: fillVertexShader,
+    fragmentShader: fillFragmentShader,
+    attributes: fillAttributes,
+  },
+  stroke: {
+    vertexShader: strokeVertexShader,
+    fragmentShader: strokeFragmentShader,
+    attributes: strokeAttributes,
+  },
+  point: {
+    vertexShader: poiontVertexShader,
+    fragmentShader: pointFragmentShader,
+    attributes: pointAttributes,
+  },
+  uniforms,
+  postProcesses
+});
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>graticule</h1>
+    <pre><code>
+import Graticule from 'ol/Graticule.js';
+
+const graticule = new Graticule({ showLabels: true });
+map.addLayer(graticule);
+    </code></pre>
   </div>
 
   <!-- Tim -->
