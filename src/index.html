@@ -288,7 +288,9 @@ textStyle.setText([
 
   <!-- Tim -->
   <div>
-    <h1>geotiff sources 🎉</h1>
+    <h1>webgl tiles
+      <br>(geotiff sources)
+    </h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -301,7 +303,9 @@ const source = new GeoTIFF({
   </div>
 
   <div>
-    <h1>geotiff sources 🎉</h1>
+    <h1>webgl tiles
+      <br>(geotiff sources)
+    </h1>
     <pre><code>
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -311,6 +315,70 @@ const source = new GeoTIFF({
     {url: 'https://example.com/B04.tif'},
     {url: 'https://example.com/B02.tif'},
   ]
+});
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>webgl tiles
+      <br>(band math)
+    </h1>
+    <pre><code>
+const red = ['band', 3];
+const nir = ['band', 4];
+const diff = ['-', nir, red];
+const sum = ['+', nir, red];
+
+const ndvi = ['/', diff, sum];
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>webgl tiles
+      <br>(style expressions)
+    </h1>
+    <pre><code>
+const layer = new TileLayer({
+  source: new GeoTIFF(options),
+  style: {
+    color: [
+      'interpolate', ['linear'], ndvi,
+      -1, 'rgb(100, 100, 100)',
+      1, 'rgb(0, 69, 0)'
+    ],
+  }
+})
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>webgl tiles
+      <br>(variables)
+    </h1>
+    <pre><code>
+const style = {
+  variables: {
+    seaLevel: 0,
+  },
+  color: [
+    'case',
+    ['&lt;=', elevation, ['var', 'seaLevel']],
+    [139, 212, 255, 1],
+    [139, 212, 255, 0],
+  ],
+}
+    </code></pre>
+  </div>
+
+  <div>
+    <h1>webgl tiles
+      <br>(variables)
+    </h1>
+    <pre><code>
+slider.addEventListener('input', () => {
+  layer.updateStyleVariables({
+    seaLevel: parseFloat(slider.value)
+  });
 });
     </code></pre>
   </div>
@@ -361,6 +429,21 @@ map.on('loadend', () => {
   element.classList.remove('spinner');
 });
     </code></pre>
+  </div>
+
+  <div>
+    <h1>additional new webgl tile features 🌱</h1>
+    <ul>
+      <li>expressions for band arguments (6.10)</li>
+      <li>support a palette operator in style expressions (6.10)</li>
+      <li>webgl context in render events (6.10)</li>
+      <li>non-square tiles (6.15)</li>
+      <li>load geotiff from blob (6.15)</li>
+      <li>geotiff nodata handling (6.9, 6.15)</li>
+      <li>geotiff normalize option (6.9)</li>
+      <li>multiple sources for webgl tile layers (6.13)</li>
+      <li>canvas reuse for webgl layers</li>
+    </ul>
   </div>
 
   <!-- Andreas -->
@@ -443,73 +526,7 @@ new WebGLPointsLayer({
   </div>
 
   <!-- Tim -->
-  <div>
-    <h1>webgl tiles
-      <br>(band math)
-    </h1>
-    <pre><code>
-const red = ['band', 3];
-const nir = ['band', 4];
-const diff = ['-', nir, red];
-const sum = ['+', nir, red];
 
-const ndvi = ['/', diff, sum];
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>webgl tiles
-      <br>(style expressions)
-    </h1>
-    <pre><code>
-const layer = new TileLayer({
-  source: new GeoTIFF(options),
-  style: {
-    color: [
-      'interpolate', ['linear'], ndvi,
-      -1, 'rgb(100, 100, 100)',
-      1, 'rgb(0, 69, 0)'
-    ],
-  }
-})
-    </code></pre>
-  </div>
-
-  <div style="width: 100%; height: 100%;">
-    <iframe src="./ndvi.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
-  </div>
-
-  <div>
-    <h1>webgl tiles
-      <br>(variables)
-    </h1>
-    <pre><code>
-const style = {
-  variables: {
-    seaLevel: 0,
-  },
-  color: [
-    'case',
-    ['&lt;=', elevation, ['var', 'seaLevel']],
-    [139, 212, 255, 1],
-    [139, 212, 255, 0],
-  ],
-}
-    </code></pre>
-  </div>
-
-  <div>
-    <h1>webgl tiles
-      <br>(variables)
-    </h1>
-    <pre><code>
-slider.addEventListener('input', () => {
-  layer.updateStyleVariables({
-    seaLevel: parseFloat(slider.value)
-  });
-});
-    </code></pre>
-  </div>
 
   <div style="width: 100%; height: 100%;">
     <iframe src="./sea-level.html" frameBorder="0" style="width: 100%; height: 100%;"></iframe>
