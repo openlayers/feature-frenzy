@@ -452,7 +452,8 @@ map.on('loadend', () => {
     <h1>map composition history</h1>
     <ul>
       <li>until v5: everything rendered to a single canvas</li>
-      <li>early v6: each layer rendered to its own canvas</li>
+      <li>early v6: each layer rendered to its own canvas<br>
+      (because we introduced layer-level webgl renderers)</li>
       <li>mid v6: combine canvas2d outputs when fully opaque, same resolution and same rotation technique</li>
       <li>late v6: combine all adjacent canvas2d outputs</li>
     </ul>
