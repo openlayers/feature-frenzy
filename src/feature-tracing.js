@@ -67,21 +67,21 @@ const map = new Map({
   }),
 });
 
-map.addInteraction(
-  new Draw({
-    type: 'Polygon',
-    source: drawVector.getSource(),
-    trace: true,
-    traceSource: baseVector.getSource(),
-    style: {
-      'stroke-color': 'rgba(255, 255, 100, 0.5)',
-      'stroke-width': 1.5,
-      'fill-color': 'rgba(255, 255, 100, 0.25)',
-      'circle-radius': 6,
-      'circle-fill-color': 'rgba(255, 255, 100, 0.5)',
-    },
-  })
-);
+const draw = new Draw({
+  type: 'Polygon',
+  source: drawVector.getSource(),
+  trace: true,
+  traceSource: baseVector.getSource(),
+  style: {
+    'stroke-color': 'rgba(255, 255, 100, 0.5)',
+    'stroke-width': 1.5,
+    'fill-color': 'rgba(255, 255, 100, 0.25)',
+    'circle-radius': 6,
+    'circle-fill-color': 'rgba(255, 255, 100, 0.5)',
+  },
+});
+
+map.addInteraction(draw);
 
 map.addInteraction(
   new Snap({
@@ -96,3 +96,10 @@ map.addInteraction(
 );
 
 map.addInteraction(new Link());
+
+document.addEventListener('keyup', (event) => {
+  if (event.key === 'Escape') {
+    draw.abortDrawing();
+    drawVector.getSource().clear();
+  }
+});
