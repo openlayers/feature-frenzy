@@ -43,11 +43,6 @@ document.getElementById('clutter').addEventListener('click', function () {
 });
 document.getElementById('declutter').addEventListener('click', function () {
   declutter(true);
-  map.getView().animate({
-    center: [1537187, 5963076],
-    zoom: 17,
-    duration: 500,
-  });
 });
 document.getElementById('richtext').addEventListener('click', function () {
   map.getView().animate({
