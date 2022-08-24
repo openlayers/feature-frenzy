@@ -10,7 +10,7 @@ hljs.highlightAll();
 // hljs.initHighlightingOnLoad();
 
 document.body.addEventListener('click', (e) => {
-  const margin = document.body.clientWidth / 6;
+  const margin = document.body.clientWidth / 10;
   if (e.clientX > document.body.clientWidth - margin) {
     big.forward();
   } else if (e.clientX < margin) {
