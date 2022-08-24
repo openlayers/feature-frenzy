@@ -100,6 +100,10 @@ class WebGLLayer extends Layer {
   }
 }
 
+const clc18Url = new URL('./data/CLC18_AT.json', import.meta.url);
+const clc12Url = new URL('./data/CLC12_AT.json', import.meta.url);
+const ch1218Url = new URL('./data/CH12_18_AT.json', import.meta.url);
+
 const base = new TileLayer({
   source: new XYZ({
     url: 'https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=' + key,
@@ -111,7 +115,7 @@ const base = new TileLayer({
 
 const vectorLayer2018 = new WebGLLayer({
   source: new VectorSource({
-    url: '/data/CLC18_AT.json',
+    url: clc18Url,
     format: new GeoJSON(),
   }),
 });
@@ -122,7 +126,7 @@ vectorLayer2018
 const vectorLayer2012 = new WebGLLayer({
   visible: false,
   source: new VectorSource({
-    url: '/data/CLC12_AT.json',
+    url: clc12Url,
     format: new GeoJSON(),
   }),
 });
@@ -130,7 +134,7 @@ const vectorLayer2012 = new WebGLLayer({
 const vectorLayerDiff = new WebGLLayer({
   visible: false,
   source: new VectorSource({
-    url: '/data/CH12_18_AT.json',
+    url: ch1218Url,
     format: new GeoJSON(),
   }),
 });
