@@ -22,7 +22,7 @@ const map = new Map({
 
 const surveyingUrl = new URL('./data/cadastre-surveying.json', import.meta.url);
 
-olms(map, surveyingUrl);
+olms(map, surveyingUrl.href);
 
 function declutter(declutter) {
   const layers = map.getLayers();
