@@ -9,10 +9,11 @@ hljs.registerLanguage('javascript', javascript);
 hljs.highlightAll();
 // hljs.initHighlightingOnLoad();
 
-document.body.addEventListener('dblclick', (e) => {
-  if (e.clientX > document.body.clientWidth / 2) {
+document.body.addEventListener('click', (e) => {
+  const margin = document.body.clientWidth / 6;
+  if (e.clientX > document.body.clientWidth - margin) {
     big.forward();
-  } else {
+  } else if (e.clientX < margin) {
     big.go(big.current - 1);
   }
 });
