@@ -14,8 +14,8 @@ globalThis.Buffer = Buffer;
 const map = new Map({
   target: 'map-container',
   view: new View({
-    center: [1537187, 5963076],
-    zoom: 17,
+    center: [1537267, 5962876],
+    zoom: 19,
   }),
   controls: defaults({attributionOptions: {collapsible: false}}),
 });
