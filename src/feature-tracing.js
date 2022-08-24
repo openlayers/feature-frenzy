@@ -11,11 +11,13 @@ import VectorSource from 'ol/source/Vector.js';
 import View from 'ol/View.js';
 import XYZ from 'ol/source/XYZ.js';
 
+const firesUrl = new URL('./data/fires.geojson', import.meta.url);
+
 // features in this layer will be snapped to
 const baseVector = new VectorLayer({
   source: new VectorSource({
     format: new GeoJSON(),
-    url: './data/fires.geojson',
+    url: firesUrl.href,
   }),
   style: {
     'fill-color': 'rgba(255, 0, 0, 0.3)',
