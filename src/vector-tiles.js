@@ -20,7 +20,9 @@ const map = new Map({
   controls: defaults({attributionOptions: {collapsible: false}}),
 });
 
-olms(map, '/data/cadastre-surveying.json');
+const surveyingUrl = new URL('./data/cadastre-surveying.json', import.meta.url);
+
+olms(map, surveyingUrl);
 
 function declutter(declutter) {
   const layers = map.getLayers();
