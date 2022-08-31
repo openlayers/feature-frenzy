@@ -36,20 +36,6 @@ const drawVector = new VectorLayer({
   },
 });
 
-// this line only appears when we're tracing a feature outer ring
-const previewLine = new Feature({
-  geometry: new LineString([]),
-});
-const previewVector = new VectorLayer({
-  source: new VectorSource({
-    features: [previewLine],
-  }),
-  style: {
-    'stroke-color': 'rgba(255, 255, 0, 1)',
-    'stroke-width': 3,
-  },
-});
-
 const map = new Map({
   layers: [
     new TileLayer({
@@ -60,7 +46,6 @@ const map = new Map({
     }),
     baseVector,
     drawVector,
-    previewVector,
   ],
   target: 'map-container',
   view: new View({
