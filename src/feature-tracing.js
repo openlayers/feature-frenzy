@@ -1,7 +1,5 @@
 import Draw from 'ol/interaction/Draw.js';
-import Feature from 'ol/Feature.js';
 import GeoJSON from 'ol/format/GeoJSON.js';
-import LineString from 'ol/geom/LineString.js';
 import Link from 'ol/interaction/Link.js';
 import Map from 'ol/Map.js';
 import Snap from 'ol/interaction/Snap.js';
