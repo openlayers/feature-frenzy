@@ -1,0 +1,29 @@
+@import "../node_modules/ol/ol.css";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --example-background: #1b1b1b;
+    --example-foreground: #eee;
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --example-background: #eee;
+    --example-foreground: #1b1b1b;
+  }
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--example-background);
+  color: var(--example-foreground);
+}
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}

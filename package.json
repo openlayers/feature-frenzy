@@ -1,36 +1,32 @@
 {
-  "name": "feature-frenzy",
-  "version": "6.7.0",
+  "name": "ol-feature-frenzy",
+  "type": "module",
+  "private": true,
   "scripts": {
-    "lint": "eslint src",
+    "lint": "eslint examples",
     "test": "npm run lint",
-    "start": "vite serve",
-    "build": "vite build",
-    "deploy": "rm -rf dist && npm run build && gh-pages -d dist"
+    "build": "slidev build",
+    "start": "slidev",
+    "export": "slidev export"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/openlayers/feature-frenzy.git"
+  "dependencies": {
+    "@iconify-json/twemoji": "^1.2.1",
+    "@slidev/cli": "^0.50.0-beta.5",
+    "@slidev/theme-default": "^0.25.0",
+    "eslint": "^8.57.1",
+    "eslint-config-openlayers": "^19.0.0",
+    "ol": "^10.2.1",
+    "vue": "^3.5.12"
   },
   "eslintConfig": {
     "extends": "openlayers",
-    "parserOptions": {
-      "ecmaVersion": "latest"
+    "rules": {
+      "no-unused-vars": [
+        "error",
+        {
+          "varsIgnorePattern": "^map"
+        }
+      ]
     }
-  },
-  "dependencies": {
-    "buffer": "^6.0.3",
-    "colormap": "^2.3.2",
-    "drag-drop": "^7.2.0",
-    "highlight.js": "^11.6.0",
-    "ol": "^7.0.1-dev.1661279677876",
-    "ol-mapbox-style": "^9.0.0",
-    "proj4": "^2.8.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.20.0",
-    "eslint-config-openlayers": "^16.2.3",
-    "gh-pages": "^3.2.3",
-    "vite": "^3.0.4"
   }
 }
