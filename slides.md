@@ -322,9 +322,50 @@ source.getView().then(({center}) => {
 
 ---
 title: Band Math
+layout: center
 ---
 
-TODO: Band Math
+# <twemoji-desktop-computer /> Band Math
+
+```js
+const red = ['band', 3];
+const nir = ['band', 4];
+const diff = ['-', nir, red];
+const sum = ['+', nir, red];
+```
+
+---
+title: Band Math (cont.)
+layout: center
+---
+
+# <twemoji-desktop-computer /> Band Math
+
+```js
+import GeoTIFF from 'ol/source/GeoTIFF.js';
+import TileLayer from 'ol/layer/WebGLTile.js';
+
+const layer = new TileLayer({
+  source: new GeoTIFF({/** ... */}),
+  style: {
+    color: [
+      'interpolate', ['linear'], ndvi,
+      -1, 'rgb(100, 100, 100)',
+      1, 'rgb(0, 69, 0)',
+    ],
+  },
+});
+```
+
+---
+title: Band Math Example
+layout: iframe-unscaled
+url: ./examples/band-math.html
+---
+
+<!--
+  Expressions run and data available on the client.
+-->
 
 ---
 title: Sentinel Hub
@@ -332,7 +373,6 @@ layout: center
 ---
 
 # <twemoji-satellite /> Sentinel Hub
-
 
 ```js twoslash
 import SentinelHub from 'ol/source/SentinelHub.js';
@@ -364,15 +404,17 @@ url: ./examples/sentinel-hub.html
 
 ---
 title: Flow Layer
+layout: center
 ---
 
 TODO: Flow Layer
 
 ---
 title: Other Slides
+layout: center
 ---
 
-TODO:
+other ideas:
  * label decluttering
  * new source loader
  * easy upgrades despite breaking changes
