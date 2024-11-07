@@ -3,6 +3,9 @@ import Layer from 'ol/layer/WebGLTile.js';
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
 import {Control, defaults as defaultControls} from 'ol/control.js';
+import {useGeographic} from 'ol/proj.js';
+
+useGeographic();
 
 function showMap(key) {
   const source = new Google({
@@ -38,12 +41,20 @@ function showMap(key) {
     controls: defaultControls().extend([new GoogleLogoControl()]),
     target: 'map',
     view: new View({
-      center: [0, 0],
-      zoom: 2,
+      center: [-58, 0],
+      zoom: 5,
     }),
   });
 }
 
-document.getElementById('key-form').addEventListener('submit', (event) => {
-  showMap(event.target.elements['key'].value);
-});
+const dialog = document.getElementById('key-dialog');
+const key = import.meta.env.VITE_GOOGLE_MAPS;
+if (key) {
+  dialog.close();
+  showMap(key);
+} else {
+  dialog.showModal();
+  document.getElementById('key-form').addEventListener('submit', (event) => {
+    showMap(event.target.elements['key'].value);
+  });
+}

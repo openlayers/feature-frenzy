@@ -14,6 +14,13 @@ Build the slideshow:
 
     npm run build
 
+The slides make use of values in a `.env` file during development. You can put one at the root of the repo with values used in `import.meta.env` properties.
+
+```bash
+# example .env file
+VITE_GOOGLE_MAPS=your-maps-key-here
+```
+
 ## Adding Slides
 
 The `slides.md` file contains markdown for the slides. See the [Slidev docs](https://sli.dev/guide/syntax) for details on the syntax.

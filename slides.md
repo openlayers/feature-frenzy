@@ -314,8 +314,8 @@ const map = new Map({
   view: new View({zoom: 12}),
 });
 
-source.getView().then((sourceView) => {
-  map.getView().setCenter(sourceView.center);
+source.getView().then(({center}) => {
+  map.getView().setCenter(center);
 });
 ```
 ````
