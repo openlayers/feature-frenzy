@@ -15,12 +15,21 @@
     "@slidev/theme-default": "^0.25.0",
     "eslint": "^8.57.1",
     "eslint-config-openlayers": "^19.0.0",
-    "ol": "^10.2.1",
+    "ol": "^10.2.2-dev.1730987055849",
+    "proj4": "^2.14.0",
     "vue": "^3.5.12"
   },
   "eslintConfig": {
     "extends": "openlayers",
     "rules": {
+      "import/no-unresolved": [
+        "error",
+        {
+          "ignore": [
+            "\\?url"
+          ]
+        }
+      ],
       "no-unused-vars": [
         "error",
         {

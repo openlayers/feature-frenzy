@@ -49,7 +49,8 @@ export default defineConfig(async () => {
            */
           server.middlewares.use(async (req, res, next) => {
             if (req.url) {
-              const filePath = join(cwd(), req.url);
+              const url = new URL(req.url, 'http://' + req.headers.host);
+              const filePath = join(cwd(), url.pathname);
               if (examples.includes(filePath)) {
                 const content = await readFile(filePath, {encoding: 'utf8'});
                 const end = res.end.bind(res);
