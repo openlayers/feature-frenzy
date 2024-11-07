@@ -328,9 +328,39 @@ TODO: Band Math
 
 ---
 title: Sentinel Hub
+layout: center
 ---
 
-TODO: Sentinel Hub
+# <twemoji-satellite /> Sentinel Hub
+
+
+```js twoslash
+import SentinelHub from 'ol/source/SentinelHub.js';
+const source = new SentinelHub({
+  data: [{
+    type: 'sentinel-2-l2a',
+    dataFilter: {
+      timeRange: {from: '2024-05-30T00:00:00Z', to: '2024-06-01T00:00:00Z'},
+    },
+  }],
+  evalscript: {
+    setup: () => ({input: ['B12', 'B08', 'B04'], output: {bands: 3}}),
+    evaluatePixel: (sample) => [2 * sample.B12, 2 * sample.B08, 2 * sample.B04],
+  },
+});
+```
+
+---
+title: Sentinel Hub Example
+layout: iframe-unscaled
+url: ./examples/sentinel-hub.html
+---
+
+<!--
+  TODO: add a date picker
+  TODO: make the evalscript editable
+-->
+
 
 ---
 title: Flow Layer

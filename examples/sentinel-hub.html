@@ -6,13 +6,13 @@
     <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-light.svg" media="(prefers-color-scheme: light)">
     <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-dark.svg" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="./common.css">
-    <title>Google Maps</title>
+    <title>Sentinel Hub</title>
     <style>
-      #key-dialog {
+      #auth-dialog {
         font-size: x-large;
         margin: 20% auto;
       }
-      #key-form {
+      #auth-form {
         display: flex;
         flex-direction: column;
       }
@@ -23,17 +23,20 @@
     </style>
   </head>
   <body>
-    <div id="map">
-      <dialog id="key-dialog">
-        <form method="dialog" id="key-form">
-          <label>Your API key
-            <br>
-            <input type="password" name="key">
-          </label>
-          <button type="submit">show map</button>
-        </form>
-      </dialog>
-    </div>
-    <script type="module" src="./google-maps.js"></script>
+    <div id="map"></div>
+    <dialog id="auth-dialog">
+      <form method="dialog" id="auth-form">
+        <label>Client id
+          <br>
+          <input type="text" name="id" autofocus>
+        </label>
+        <label>Client secret
+          <br>
+          <input type="password" name="secret">
+        </label>
+        <button type="submit">show map</button>
+      </form>
+    </dialog>    
+    <script type="module" src="./sentinel-hub.js"></script>
   </body>
 </html>

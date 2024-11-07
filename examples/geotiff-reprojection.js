@@ -30,7 +30,7 @@ const map = new Map({
         format: new GeoJSON(),
       }),
       style: {
-        'stroke-color': 'rgb(50 50 50 / 50%)',
+        'stroke-color': '#00AAFFAA',
         'stroke-width': 1.2,
       },
     }),
