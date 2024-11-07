@@ -35,8 +35,12 @@ Look through the [Twemoji collection](https://icon-sets.iconify.design/twemoji/)
 
 ## Quirks
 
+ * After adding a new example, you need to restart the dev server so it gets picked up (otherwise you'll see a 404).
+
  * After viewing one of the map examples, if you can't navigate with the keyboard, hover over the bottom left of the page to get the previous/next slide controls.
 
  * Periodically, the screen may go blank during development. If you see `Uncaught TypeError: Cannot read properties of undefined (reading 'currentRoute')` in the console, you may need to close the tab, stop the dev server, and start over. Keep an eye on https://github.com/slidevjs/slidev/issues/1925 to see if this is addressed in Slidev.
+
+ * I've found I need to clear the browser cache periodically. If things go really bad, you can delete the `node_modules/.vite` folder and start the dev server again.
 
  * Although Vite accepts a JavaScript `vite.config.js` file, Slidev requires `vite.config.ts`.

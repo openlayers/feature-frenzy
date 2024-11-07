@@ -321,6 +321,12 @@ source.getView().then(({center}) => {
 ````
 
 ---
+layout: fact
+---
+
+# <twemoji-test-tube /> How else can the data be manipulated?
+
+---
 title: Band Math
 layout: center
 ---
@@ -401,13 +407,42 @@ url: ./examples/sentinel-hub.html
   TODO: make the evalscript editable
 -->
 
+---
+layout: fact
+---
+
+# <twemoji-wrapped-gift /> What else is new?
 
 ---
 title: Flow Layer
-layout: center
+layout: image
+image: /windy.png
 ---
 
-TODO: Flow Layer
+<style>
+  h1.big {
+    text-align: center;
+    font-size: 10rem;
+    margin: 10% 0;
+    font-weight: bold;
+    font-style: italic;
+  }
+</style>
+
+<h1 class="big">
+  <twemoji-wind-face /> Wind!
+</h1>
+
+---
+title: Flow Layer Example
+layout: iframe-unscaled
+url: ./examples/flow-layer.html
+---
+
+<!--
+  TODO: add a date picker
+  TODO: make the evalscript editable
+-->
 
 ---
 title: Other Slides
