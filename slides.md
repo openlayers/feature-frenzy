@@ -324,7 +324,7 @@ source.getView().then(({center}) => {
 layout: fact
 ---
 
-# <twemoji-test-tube /> How else can the data be manipulated?
+# <twemoji-test-tube /> How else can raster data be manipulated?
 
 ---
 title: Band Math
