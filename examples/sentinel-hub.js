@@ -18,17 +18,22 @@ const source = new SentinelHub({
       },
     },
   ],
-  evalscript: {
-    setup: () => ({
-      input: ['B12', 'B08', 'B04'],
-      output: {bands: 3},
-    }),
-    evaluatePixel: (sample) => [
-      2.5 * sample.B12,
-      2 * sample.B08,
-      2 * sample.B04,
-    ],
-  },
+  evalscript: `//VERSION=3
+    function setup() {
+      return {
+        input: ['B12', 'B08', 'B04'],
+        output: {bands: 3},
+      };
+    }
+
+    function evaluatePixel(sample) {
+      return [
+        2.5 * sample.B12,
+        2 * sample.B08,
+        2 * sample.B04,
+      ];
+    }
+  `,
 });
 
 const map = new Map({
