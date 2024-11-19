@@ -445,6 +445,75 @@ url: ./examples/flow-layer.html
 -->
 
 ---
+title: Continuous Improvements
+layout: fact
+---
+
+# <twemoji-glowing-star /> Continuous improvements
+
+---
+title: Text Style and Rendering
+layout: center
+---
+
+# <twemoji-placard /> Text Style and Rendering
+
+````md magic-move
+```js
+new VectorLayer({
+  style: (feature) => new Style({
+    text: new Text({
+      text: feature.get('name')
+    }
+  })
+});
+```
+```js
+new VectorLayer({
+  style: (feature) => new Style({
+    text: new Text({
+      text: feature.get('name'),
+      // v4.4.0 - September 2017
+      placement: 'line'
+    }
+  })
+});
+```
+```js
+new VectorLayer({
+  // v4.5.0 - November 2017
+  declutter: true,
+  style: (feature) => new Style({
+    text: new Text({
+      text: feature.get('name'),
+      // v4.4.0 - September 2017
+      placement: 'line'
+    }
+  })
+});
+```
+````
+
+---
+title: Decluttering
+layout: image
+image: /declutter.png
+backgroundSize: contain
+# See https://github.com/openlayers/openlayers/pull/7328
+---
+
+---
+title: Label Rendering Example
+layout: iframe-unscaled
+url: ./examples/declutter.html
+---
+
+<!--
+  Zoom and rotate. Show nice labels.
+-->
+
+
+---
 title: Other Slides
 layout: center
 ---
