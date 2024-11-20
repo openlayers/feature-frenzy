@@ -335,6 +335,7 @@ const red = ['band', 3];
 const nir = ['band', 4];
 const diff = ['-', nir, red];
 const sum = ['+', nir, red];
+const ndvi = ['/', diff, sum];
 ```
 
 ---
