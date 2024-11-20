@@ -7,9 +7,31 @@
     <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-dark.svg" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="./common.css">
     <title>Flow Layer</title>
+    <style>
+      #overlay {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: white;
+        font-size: x-large;
+        text-shadow: rgb(0, 0, 0) 0 0 2px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
+      #direction {
+        text-align: left;
+        min-width: 3rem;
+      }
+    </style>
   </head>
   <body>
     <div id="map"></div>
+    <div id="overlay">
+      <div id="speed"></div>
+      <div id="arrow">➤</div>
+      <div id="direction"></div>
+    </div>
     <script type="module" src="./flow-layer.js"></script>
   </body>
 </html>

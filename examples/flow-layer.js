@@ -159,6 +159,14 @@ for (let i = 0; i < colors.length; ++i) {
   colorStops.push(colors[i]);
 }
 
+const flow = new Flow({
+  source: wind,
+  maxSpeed,
+  style: {
+    color: ['interpolate', ['linear'], ['get', 'speed'], ...colorStops],
+  },
+});
+
 const map = new Map({
   target: 'map',
   pixelRatio: 2,
@@ -169,16 +177,33 @@ const map = new Map({
         format: new GeoJSON(),
       }),
     }),
-    new Flow({
-      source: wind,
-      maxSpeed,
-      style: {
-        color: ['interpolate', ['linear'], ['get', 'speed'], ...colorStops],
-      },
-    }),
+    flow,
   ],
   view: new View({
     center: [0, 0],
     zoom: 0,
   }),
 });
+
+const speedEl = document.getElementById('speed');
+const arrowEl = document.getElementById('arrow');
+const directionEl = document.getElementById('direction');
+const directions = ['W', 'SW', 'S', 'SE', 'E', 'NE', 'N', 'NW'];
+function displayPixelValue(event) {
+  const data = flow.getData(event.pixel);
+  if (!data) {
+    return;
+  }
+  const vx = data[0];
+  const vy = data[1];
+
+  const speed = Math.sqrt(vx * vx + vy * vy);
+  speedEl.innerText = speed.toFixed(1) + ' m/s';
+
+  const direction = Math.atan2(vy, vx);
+  arrowEl.style = `transform: rotate(${-direction}rad)`;
+
+  const index = (8 + Math.round(direction / (Math.PI / 4))) % 8;
+  directionEl.innerText = directions[index];
+}
+map.on(['pointermove', 'click'], displayPixelValue);
