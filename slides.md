@@ -240,7 +240,7 @@ import View from 'ol/View.js';
 import proj4 from 'proj4';
 import {register} from 'ol/proj/proj4.js';
 
-// prior to ol@10.3.0
+// with proj4@2.13.0, prior to ol@10.3.0
 register(proj4);
 
 const source = new GeoTIFF({
@@ -300,9 +300,6 @@ import GeoTIFF from 'ol/source/GeoTIFF.js';
 import Map from 'ol/Map.js';
 import TileLayer from 'ol/layer/WebGLTile.js';
 import View from 'ol/View.js';
-import {useGeographic} from 'ol/proj.js';
-
-useGeographic();
 
 const source = new GeoTIFF({
   sources: [{url: 'https://example.com/cog.tif'}],
