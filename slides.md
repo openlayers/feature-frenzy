@@ -394,6 +394,13 @@ const source = new SentinelHub({
 });
 ```
 
+<!--
+  B12: SWIR 2
+  B08: NIR
+  B04: red
+-->
+
+
 ---
 title: Sentinel Hub Example
 layout: iframe-unscaled
