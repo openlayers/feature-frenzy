@@ -14,6 +14,16 @@ apply('map', 'https://tiles.openfreemap.org/styles/liberty').then((map) => {
     });
   }
 
+  function obstacle(obstacle) {
+    const layers = map.get('mapbox-style').layers;
+    layers.forEach((layer, i) => {
+      if (layer.layout?.['icon-allow-overlap'] === !obstacle) {
+        layer.layout['icon-allow-overlap'] = obstacle;
+        updateMapboxLayer(map, layer);
+      }
+    });
+  }
+
   document.getElementById('clutter').addEventListener('click', function () {
     declutter(false);
   });
@@ -43,9 +53,14 @@ apply('map', 'https://tiles.openfreemap.org/styles/liberty').then((map) => {
     });
   });
 
+  document.getElementById('obstacle').addEventListener('click', function () {
+    obstacle(false);
+  });
+
   const originalLabelCountry1 = getMapboxLayer(map, 'label_country_1');
   document.getElementById('reset').addEventListener('click', function () {
     updateMapboxLayer(map, originalLabelCountry1);
     declutter(true);
+    obstacle(true);
   });
 });

@@ -457,11 +457,11 @@ layout: fact
 # <twemoji-glowing-star /> Continuous improvements
 
 ---
-title: Text Style and Rendering
+title: (Text) Style and Rendering
 layout: center
 ---
 
-# <twemoji-placard /> Text Style and Rendering
+# <twemoji-placard /> (Text) Style and Rendering
 
 ````md magic-move
 ```js
@@ -469,7 +469,7 @@ new VectorLayer({
   style: (feature) => new Style({
     text: new Text({
       text: feature.get('name')
-    }
+    })
   })
 });
 ```
@@ -480,7 +480,7 @@ new VectorLayer({
       text: feature.get('name'),
       // v4.4.0 - September 2017
       placement: 'line'
-    }
+    })
   })
 });
 ```
@@ -493,7 +493,7 @@ new VectorLayer({
       text: feature.get('name'),
       // v4.4.0 - September 2017
       placement: 'line'
-    }
+    })
   })
 });
 ```
@@ -508,15 +508,125 @@ backgroundSize: contain
 ---
 
 ---
+title: (Text) Style and Rendering
+layout: center
+---
+
+# <twemoji-placard /> (Text) Style and Rendering
+
+````md magic-move
+```js
+new VectorLayer({
+  // v4.5.0 - November 2017
+  declutter: true,
+  style: (feature) => new Style({
+    text: new Text({
+      text: feature.get('name'),
+      // v4.4.0 - September 2017
+      placement: 'line'
+    })
+  })
+});
+```
+```js
+new VectorLayer({
+  // v4.5.0 - November 2017
+  declutter: true,
+  style: (feature) => new Style({
+    font: '13px Calibri,sans-serif'
+    text: new Text({
+      // v6.13.0 - February 2022
+      text: [
+        feature.getId(),
+        'bold 13px Calibri,sans-serif',
+        ` ${feature.get('name')}`,
+        ''
+      ],
+      // v4.4.0 - September 2017
+      placement: 'line'
+    })
+  })
+});
+```
+```js
+new VectorLayer({
+  // v9.0.0 - February 2024
+  declutter: 'group-1',
+  style: (feature) => new Style({
+    font: '13px Calibri,sans-serif'
+    text: new Text({
+      // v9.0.0 - February 2024
+      declutterMode: 'obstacle',
+      // v6.13.0 - February 2022
+      text: [
+        feature.getId(),
+        'bold 13px Calibri,sans-serif',
+        ` ${feature.get('name')}`,
+        ''
+      ],
+      // v4.4.0 - September 2017
+      placement: 'line'
+    })
+  })
+});
+```
+````
+
+<!--
+declutterMode option for Image styles had existed for a while already, but were broken until
+the same option was introduced for Text styles.
+-->
+
+---
 title: Label Rendering Example
 layout: iframe-unscaled
 url: ./examples/declutter.html
 ---
 
 <!--
-  Zoom and rotate. Show nice labels.
+  Zoom and rotate. Show nice labels. The `obstacle` button shows the effect on icons, not text.
 -->
 
+
+---
+title: (Text) Style and Rendering
+layout: center
+---
+
+# <twemoji-candy /> (Text) Style &ndash; One More Thing
+
+````md magic-move
+```js
+new VectorLayer({
+  style: (feature) => new Style({
+    text: new Text({
+      font: '13px Calibri,sans-serif',
+      text: feature.get('name'),
+      placement: 'line',
+      fill: new Fill({
+        color: 'black'
+      }),
+      stroke: new Stroke({
+        color: 'white',
+        width: 2
+      })
+    })
+  })
+});
+```
+```js
+new VectorLayer({
+  style: {
+    'text-font': '13px Calibri,sans-serif',
+    'text-value': ['get', 'name'],
+    'text-placement': 'line',
+    'text-fill-color': 'black',
+    'text-stroke-color': 'white',
+    'text-stroke-width': 2
+  }
+});
+```
+````
 
 ---
 title: Other Slides
