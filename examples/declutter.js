@@ -6,7 +6,7 @@ apply('map', 'https://tiles.openfreemap.org/styles/liberty').then((map) => {
 
   function declutter(declutter) {
     const layers = map.getLayers();
-    layers.forEach((layer, i) => {
+    layers.forEach((layer) => {
       if (typeof layer.setDeclutter !== 'function') {
         return;
       }
@@ -16,7 +16,7 @@ apply('map', 'https://tiles.openfreemap.org/styles/liberty').then((map) => {
 
   function obstacle(obstacle) {
     const layers = map.get('mapbox-style').layers;
-    layers.forEach((layer, i) => {
+    layers.forEach((layer) => {
       if (layer.layout?.['icon-allow-overlap'] === !obstacle) {
         layer.layout['icon-allow-overlap'] = obstacle;
         updateMapboxLayer(map, layer);

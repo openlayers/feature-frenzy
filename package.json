@@ -18,6 +18,7 @@
     "eslint-config-openlayers": "^19.0.0",
     "ol": "^10.2.2-dev.1732401392689",
     "ol-mapbox-style": "^12.3.5",
+    "pmtiles": "^4.0.1",
     "proj4": "^2.14.0",
     "vue": "^3.5.12"
   },

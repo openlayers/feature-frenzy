@@ -629,13 +629,91 @@ new VectorLayer({
 ````
 
 ---
+layout: fact
+---
+
+# <twemoji-puzzle-piece /> Simpler API and external libraries
+
+---
+title: Custom loaders
+layout: center
+---
+
+# <twemoji-inbox-tray /> Tile Loaders and Sources
+
+````md magic-move
+```js
+import {PMTiles} from 'pmtiles';
+import Source from 'ol/source/XYZ.js';
+
+const loadImage = (image, src) => new Promise((ok, nok) => {
+  image.addEventListener('load', () => ok(image));
+  image.addEventListener('error', () => nok(new Error('Error loading image')));
+  image.src = src;
+});
+
+const tiles = new PMTiles(
+  'https://pmtiles.io/stamen_toner(raster)CC-BY+ODbL_z3.pmtiles'
+);
+
+const source = new Source({
+  tileUrlFunction(tileCoord) {
+    return tileCoord;
+  },
+  async tileLoadFunction(tile) {
+    const [z, x, y] = tile.tileCoord;
+    const blob = new Blob([(await tiles.getZxy(z, x, y)).data]);
+    const src = URL.createObjectURL(blob);
+    await loadImage(tile.getImage(), src);
+    URL.revokeObjectURL(src);
+  }
+});
+```
+```js
+import {PMTiles} from 'pmtiles';
+import Source from 'ol/source/ImageTile.js';
+
+const loadImage = (image, src) => new Promise((ok, nok) => {
+  image.addEventListener('load', () => ok(image));
+  image.addEventListener('error', () => nok(new Error('Error loading image')));
+  image.src = src;
+});
+
+const tiles = new PMTiles(
+  'https://pmtiles.io/stamen_toner(raster)CC-BY+ODbL_z3.pmtiles'
+);
+
+const source = new Source({
+  async loader(z, x, y, {signal}) {
+    const blob = new Blob([await tiles.getZxy(z, x, y, signal).data])
+    const src = URL.createObjectURL(blob);
+    const image = await loadImage(new Image(), src);
+    URL.revokeObjectURL(src);
+    return image;
+  }
+});
+```
+```js
+import {PMTilesRasterSource as Source} from 'ol-pmtiles';
+
+const source = new Source({
+  url: 'https://pmtiles.io/stamen_toner(raster)CC-BY+ODbL_z3.pmtiles'
+});
+```
+````
+
+---
+title: PMTiles Example
+layout: iframe-unscaled
+url: ./examples/pmtiles.html
+---
+
+---
 title: Other Slides
 layout: center
 ---
 
 other ideas:
- * label decluttering
- * new source loader
  * easy upgrades despite breaking changes
 
 ---
