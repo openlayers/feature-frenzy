@@ -16,7 +16,7 @@
     "colormap": "^2.3.2",
     "eslint": "^8.57.1",
     "eslint-config-openlayers": "^19.0.0",
-    "ol": "^10.2.2-dev.1732401392689",
+    "ol": "^10.2.2-dev.1732723676290",
     "ol-mapbox-style": "^12.3.5",
     "pmtiles": "^4.0.1",
     "proj4": "^2.14.0",

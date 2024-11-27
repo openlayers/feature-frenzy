@@ -1,11 +1,10 @@
 import DataTileSource from 'ol/source/DataTile.js';
 import Flow from 'ol/layer/Flow.js';
 import GeoJSON from 'ol/format/GeoJSON.js';
-import Layer from 'ol/layer/Layer.js';
 import Map from 'ol/Map.js';
 import VectorSource from 'ol/source/Vector.js';
 import View from 'ol/View.js';
-import WebGLVectorLayerRenderer from 'ol/renderer/webgl/VectorLayer.js';
+import WebGLVectorLayer from 'ol/layer/WebGLVector.js';
 import colormap from 'colormap';
 import windUrl from '/wind.png?url';
 import {createXYZ, wrapX} from 'ol/tilegrid.js';
@@ -136,16 +135,6 @@ const wind = new DataTileSource({
   },
 });
 
-class WebGLLayer extends Layer {
-  createRenderer() {
-    return new WebGLVectorLayerRenderer(this, {
-      style: {
-        'fill-color': '#555555',
-      },
-    });
-  }
-}
-
 const maxSpeed = 20;
 const colors = colormap({
   colormap: 'viridis',
@@ -171,11 +160,14 @@ const map = new Map({
   target: 'map',
   pixelRatio: 2,
   layers: [
-    new WebGLLayer({
+    new WebGLVectorLayer({
       source: new VectorSource({
         url: 'https://openlayers.org/data/vector/ocean.json',
         format: new GeoJSON(),
       }),
+      style: {
+        'fill-color': '#555555',
+      },
     }),
     flow,
   ],
