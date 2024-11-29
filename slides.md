@@ -710,12 +710,122 @@ url: ./examples/scaled-svg.html
 ---
 
 ---
-title: Other Slides
+layout: fact
+---
+
+# <twemoji-wrench /> Easy upgrades despite breaking changes
+
+---
+title: From ol@7 to ol@10
 layout: center
 ---
 
-other ideas:
- * easy upgrades despite breaking changes
+# <twemoji-building-construction /> From ol@7 to ol@10
+
+````md magic-move
+```js
+// ol@7
+import VectorLayer from 'ol/layer/Vector.js';
+import VectorSource from 'ol/source/Vector.js';
+import MapboxVectorLayer from 'ol/layer/MapboxVector.js';
+import {fromExtent} from 'ol/geom/Polygon.js';
+import {fromLonLat} from 'ol/proj.js';
+import {map} from './map.js';
+
+const box = [...fromLonLat([16.1, 48.1]), ...fromLonLat([16.2, 48.2])];
+
+const layer = new MapboxVectorLayer({
+  styleUrl: 'mapbox://styles/mapbox/bright-v9',
+  accessToken: 'Your Mapbox access token from https://mapbox.com/ here',
+});
+map.addLayer(layer);
+const overlay = new VectorLayer({
+  source: new VectorSource({
+    features: [fromExtent(box)],
+  }),
+});
+overlay.on('prerender', () => map.flushDeclutterItems());
+map.addLayer(overlay);
+
+const features = layer.getSource().getFeaturesInExtent(box);
+```
+```js
+// ol@8
+import VectorLayer from 'ol/layer/Vector.js';
+import VectorSource from 'ol/source/Vector.js';
+import {MapboxVectorLayer} from 'ol-mapbox-style';
+import {fromExtent} from 'ol/geom/Polygon.js';
+import {fromLonLat} from 'ol/proj.js';
+import {map} from './map.js';
+
+const box = [...fromLonLat([16.1, 48.1]), ...fromLonLat([16.2, 48.2])];
+
+const layer = new MapboxVectorLayer({
+  styleUrl: 'mapbox://styles/mapbox/bright-v9',
+  accessToken: 'Your Mapbox access token from https://mapbox.com/ here',
+});
+map.addLayer(layer);
+const overlay = new VectorLayer({
+  source: new VectorSource({
+    features: [fromExtent(box)],
+  }),
+});
+overlay.on('prerender', () => map.flushDeclutterItems());
+map.addLayer(overlay);
+
+const features = layer.getSource().getFeaturesInExtent(box);
+```
+```js
+// ol@9
+import VectorLayer from 'ol/layer/Vector.js';
+import VectorSource from 'ol/source/Vector.js';
+import {MapboxVectorLayer} from 'ol-mapbox-style';
+import {fromExtent} from 'ol/geom/Polygon.js';
+import {fromLonLat} from 'ol/proj.js';
+import {map} from './map.js';
+
+const box = [...fromLonLat([16.1, 48.1]), ...fromLonLat([16.2, 48.2])];
+
+const layer = new MapboxVectorLayer({
+  styleUrl: 'mapbox://styles/mapbox/bright-v9',
+  accessToken: 'Your Mapbox access token from https://mapbox.com/ here',
+});
+map.addLayer(layer);
+const overlay = new VectorLayer({
+  source: new VectorSource({
+    features: [fromExtent(box)],
+  }),
+});
+map.addLayer(overlay);
+
+const features = layer.getSource().getFeaturesInExtent(box);
+```
+```js
+// ol@10
+import VectorLayer from 'ol/layer/Vector.js';
+import VectorSource from 'ol/source/Vector.js';
+import {MapboxVectorLayer} from 'ol-mapbox-style';
+import {fromExtent} from 'ol/geom/Polygon.js';
+import {fromLonLat} from 'ol/proj.js';
+import {map} from './map.js';
+
+const box = [...fromLonLat([16.1, 48.1]), ...fromLonLat([16.2, 48.2])];
+
+const layer = new MapboxVectorLayer({
+  styleUrl: 'mapbox://styles/mapbox/bright-v9',
+  accessToken: 'Your Mapbox access token from https://mapbox.com/ here',
+});
+map.addLayer(layer);
+const overlay = new VectorLayer({
+  source: new VectorSource({
+    features: [fromExtent(box)],
+  }),
+});
+map.addLayer(overlay);
+
+const features = layer.getFeaturesInExtent(box);
+```
+````
 
 ---
 title: Thanks
