@@ -632,80 +632,81 @@ new VectorLayer({
 layout: fact
 ---
 
-# <twemoji-puzzle-piece /> Simpler API and external libraries
+# <twemoji-light-bulb /> API Simplifications
 
 ---
-title: Custom loaders
+title: Custom tile loaders
 layout: center
 ---
 
-# <twemoji-inbox-tray /> Tile Loaders and Sources
+# <twemoji-inbox-tray /> Custom Tile Loaders
 
 ````md magic-move
 ```js
-import {PMTiles} from 'pmtiles';
 import Source from 'ol/source/XYZ.js';
 
-const loadImage = (image, src) => new Promise((ok, nok) => {
-  image.addEventListener('load', () => ok(image));
-  image.addEventListener('error', () => nok(new Error('Error loading image')));
-  image.src = src;
-});
-
-const tiles = new PMTiles(
-  'https://pmtiles.io/stamen_toner(raster)CC-BY+ODbL_z3.pmtiles'
-);
-
 const source = new Source({
-  tileUrlFunction(tileCoord) {
-    return tileCoord;
+  tileUrlFunction([z, x, y]) {
+    return `${z}/${x}/${y}.png`;
   },
-  async tileLoadFunction(tile) {
-    const [z, x, y] = tile.tileCoord;
-    const blob = new Blob([(await tiles.getZxy(z, x, y)).data]);
-    const src = URL.createObjectURL(blob);
-    await loadImage(tile.getImage(), src);
-    URL.revokeObjectURL(src);
+  tileLoadFunction(tile, url) {
+    tile.getImage().src = url;
   }
 });
 ```
 ```js
-import {PMTiles} from 'pmtiles';
 import Source from 'ol/source/ImageTile.js';
 
-const loadImage = (image, src) => new Promise((ok, nok) => {
-  image.addEventListener('load', () => ok(image));
-  image.addEventListener('error', () => nok(new Error('Error loading image')));
-  image.src = src;
-});
-
-const tiles = new PMTiles(
-  'https://pmtiles.io/stamen_toner(raster)CC-BY+ODbL_z3.pmtiles'
-);
-
 const source = new Source({
-  async loader(z, x, y, {signal}) {
-    const blob = new Blob([await tiles.getZxy(z, x, y, signal).data])
-    const src = URL.createObjectURL(blob);
-    const image = await loadImage(new Image(), src);
-    URL.revokeObjectURL(src);
-    return image;
+  loader(z, x, y, {signal}) {
+    const image = new Image();
+    image.src = `${z}/${x}/${y}.png`};
+    return image.decode();
   }
-});
-```
-```js
-import {PMTilesRasterSource as Source} from 'ol-pmtiles';
-
-const source = new Source({
-  url: 'https://pmtiles.io/stamen_toner(raster)CC-BY+ODbL_z3.pmtiles'
 });
 ```
 ````
 
 ---
-title: PMTiles Example
+title: Custom image loaders
+layout: center
+---
+
+# <twemoji-inbox-tray /> Image Loaders Too!
+
+````md magic-move
+```js
+import Source from 'ol/source/Image.js';
+
+const source = new Source({
+  loader(extent, resolution, pixelRatio) {
+    const image = new Image();
+    const params = new URLSearchParams({
+      'mm-per-pixel': resolution * 1000,
+      bbox: extent.join(','),
+    });
+    image.src = `map?crs=[EPSG:3857]&scale-denominator=1&${query.toString()}`;
+    return image.decode();
+  }
+});
+```
+```js
+import Source from 'ol/source/Image.js';
+import { createLoader } from 'ol/source/static.js';
+import { load } from 'ol/Image.js';
+
+const source = new Source({
+  loader: createLoader({
+    url: 'map.svg',
+    load,
+  })
+});
+```
+````
+---
+title: Scaled SVG Example
 layout: iframe-unscaled
-url: ./examples/pmtiles.html
+url: ./examples/scaled-svg.html
 ---
 
 ---
