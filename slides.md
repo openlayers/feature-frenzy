@@ -686,7 +686,7 @@ const source = new Source({
       bbox: extent.join(','),
     });
     image.src = `map?crs=[EPSG:3857]&scale-denominator=1&${query.toString()}`;
-    return image.decode();
+    return {image: image.decode(), pixelRatio: 1};
   }
 });
 ```
