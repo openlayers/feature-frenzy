@@ -20,10 +20,46 @@
         font-size: x-large;
         margin: 1rem 0 0;
       }
+      #controls {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        gap: 1rem;
+      }
+      #evalscript {
+        display: none;
+      }
+      .shiki {
+        margin: 0;
+        padding: 1rem;
+      }
+      #evalscript-toggle {
+        font-size: large;
+        font-family: monospace;
+      }
+      #vis {
+        font-size: large;
+      }
     </style>
   </head>
   <body>
     <div id="map"></div>
+    <div id="controls">
+      <div id="evalscript"></div>
+      <button id="evalscript-toggle">&lt;/&gt;</button>
+      <select id="vis">
+        <optgroup label="False Color Composite">
+          <option value="before">2018</option>
+          <option selected value="after">2024</option>
+        </optgroup>
+        <optgroup label="Change">
+          <option value="change">new snow</option>
+        </optgroup>
+      </select>
+    </div>
     <dialog id="auth-dialog">
       <form method="dialog" id="auth-form">
         <label>Client id

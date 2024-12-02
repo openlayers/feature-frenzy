@@ -384,7 +384,7 @@ const source = new SentinelHub({
   data: [{
     type: 'sentinel-2-l2a',
     dataFilter: {
-      timeRange: {from: '2024-05-30T00:00:00Z', to: '2024-06-01T00:00:00Z'},
+      timeRange: {from: '2024-08-29T00:00:00Z', to: '2024-08-30T00:00:00Z'},
     },
   }],
   evalscript: {
@@ -411,6 +411,30 @@ url: ./examples/sentinel-hub.html
   TODO: add a date picker
   TODO: make the evalscript editable
 -->
+
+---
+title: Copernicus Browser
+layout: center
+---
+
+# <twemoji-free-button /> Copernicus Data Space Ecosystem
+
+```js twoslash
+import SentinelHub from 'ol/source/SentinelHub.js';
+
+const source = new SentinelHub({
+  url: 'https://sh.dataspace.copernicus.eu/api/v1/process',
+  auth: {
+    clientId: 'YOUR-CLIENT-ID',
+    clientSecret: 'YOUR-CLIENT-SECRET',
+    tokenUrl:
+      'https://identity.dataspace.copernicus.eu/auth/' +
+      'realms/CDSE/protocol/openid-connect/token',
+  },
+  data: [],
+  evalscript: '...',
+});
+```
 
 ---
 layout: fact

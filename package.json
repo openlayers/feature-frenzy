@@ -16,9 +16,10 @@
     "colormap": "^2.3.2",
     "eslint": "^8.57.1",
     "eslint-config-openlayers": "^19.0.0",
-    "ol": "^10.2.2-dev.1732723676290",
+    "ol": "^10.3.0",
     "ol-mapbox-style": "^12.3.5",
     "proj4": "^2.14.0",
+    "shiki": "^1.22.2",
     "vue": "^3.5.12"
   },
   "eslintConfig": {
