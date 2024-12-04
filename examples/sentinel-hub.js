@@ -13,7 +13,7 @@ const map = new Map({
   layers: [new TileLayer({source})],
   target: 'map',
   view: new View({
-    center: [-121.75, 46.85],
+    center: [-121.75915, 46.85689],
     zoom: 12,
     minZoom: 7,
     maxZoom: 13,
@@ -78,17 +78,19 @@ function setup() {
   };
 }
 
+function ndsi(s) {
+  return (s.B04 - s.B12) / (s.B12 + s.B04);
+}
+
 function evaluatePixel(samples) {
   const before = samples.before[0];
-  const beforeNdsi = (before.B04 - before.B12) / (before.B12 + before.B04);
-
+  const beforeNdsi = ndsi(before);
   const after = samples.after[0];
-  const afterNdsi = (after.B04 - after.B12) / (after.B12 + after.B04);
+  const afterNdsi = ndsi(after);
 
   if (afterNdsi > 0.4 && beforeNdsi <= 0.4) {
     return [1, 1, 0];
   }
-
   return [2.5 * after.B12, 2 * after.B08, 2 * after.B04];
 }`;
 
@@ -110,10 +112,14 @@ function evaluatePixel(sample) {
 }`;
 
 const evalscriptOutput = document.getElementById('evalscript');
-document.getElementById('evalscript-toggle').addEventListener('click', () => {
+const evalscriptToggle = document.getElementById('evalscript-toggle');
+function toggleEvalscript() {
   const evalscriptShown = evalscriptOutput.style.display === 'block';
   evalscriptOutput.style.display = evalscriptShown ? 'none' : 'block';
-});
+  evalscriptToggle.style.display = evalscriptShown ? 'block' : 'none';
+}
+evalscriptToggle.addEventListener('click', toggleEvalscript);
+evalscriptOutput.addEventListener('click', toggleEvalscript);
 
 async function updateData() {
   const value = vis.value;
