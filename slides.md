@@ -865,3 +865,5 @@ andreas@ahocevar.com
 tim@planet.com
 
 https://openlayers.org/feature-frenzy/
+
+https://github.com/openlayers/feature-frenzy/
