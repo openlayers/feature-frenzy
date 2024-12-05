@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-light.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-dark.svg" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="./common.css">
+    <title>Scaled SVG</title>
+    <style>
+    #output {
+      position: absolute;
+      top: 2em;
+      right: 2em;
+      text-align: center;
+      -webkit-text-stroke: 0.5px white;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    #output a {
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      background-color: var(--example-background);
+      -webkit-text-stroke: inherit;
+      padding: 3px;
+      margin: 5px;
+      width: 100px;
+      border-radius: 5px;
+      border: 1px solid black;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="output">
+      <a id="decode">decode</a>
+      <a id="load">load</a>
+    </div>
+    <script type="module" src="./scaled-svg.js"></script>
+  </body>
+</html>

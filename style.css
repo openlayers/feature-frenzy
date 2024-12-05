@@ -1,0 +1,21 @@
+:root {
+  /**
+   * See defaults in https://github.com/slidevjs/slidev/blob/v0.50.0-beta.5/packages/client/styles/vars.css
+   */
+  --slidev-code-font-size: 18px;
+}
+
+.slidev-layout a {
+  border-style: none;
+}
+
+.slidev-layout.cover {
+  place-content: center;
+  text-align: center;
+}
+
+.slidev-layout.cover :is(h1, h2, h3, h4, h5, h6),
+.slidev-layout.center :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 2rem;
+  text-align: center;
+}

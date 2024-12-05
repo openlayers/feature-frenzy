@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-light.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-dark.svg" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="./common.css">
+    <title>Band Math</title>
+    <style>
+      #overlay {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: white;
+        font-size: x-large;
+        text-shadow: rgb(0, 0, 0) 0 0 2px;
+        min-width: 8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="overlay">NDVI: <span id="output"></span></div>
+    <script type="module" src="./band-math.js"></script>
+  </body>
+</html>

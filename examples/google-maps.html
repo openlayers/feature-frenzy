@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-light.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-dark.svg" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="./common.css">
+    <title>Google Maps</title>
+    <style>
+      #key-dialog {
+        font-size: x-large;
+        margin: 20% auto;
+      }
+      #key-form {
+        display: flex;
+        flex-direction: column;
+      }
+      button[type=submit] {
+        font-size: x-large;
+        margin: 1rem 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map">
+      <dialog id="key-dialog">
+        <form method="dialog" id="key-form">
+          <label>Your API key
+            <br>
+            <input type="password" name="key">
+          </label>
+          <button type="submit">show map</button>
+        </form>
+      </dialog>
+    </div>
+    <script type="module" src="./google-maps.js"></script>
+  </body>
+</html>

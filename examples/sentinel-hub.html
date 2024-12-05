@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-light.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="https://openlayers.org/theme/img/logo-dark.svg" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="./common.css">
+    <title>Sentinel Hub</title>
+    <style>
+      #auth-dialog {
+        font-size: x-large;
+        margin: 20% auto;
+      }
+      #auth-form {
+        display: flex;
+        flex-direction: column;
+      }
+      button[type=submit] {
+        font-size: x-large;
+        margin: 1rem 0 0;
+      }
+      #controls {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        gap: 1rem;
+      }
+      #evalscript {
+        display: none;
+      }
+      .shiki {
+        margin: 0;
+        padding: 1rem;
+      }
+      #evalscript-toggle {
+        font-size: large;
+        font-family: monospace;
+      }
+      pre code {
+        white-space: pre-wrap;
+        font-family: 'Fira Code', monospace;
+        font-size: 2vmin
+      }
+      #vis {
+        font-size: large;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="controls">
+      <div id="evalscript"></div>
+      <button id="evalscript-toggle">&lt;/&gt;</button>
+      <select id="vis">
+        <optgroup label="False Color Composite">
+          <option value="before">2018</option>
+          <option selected value="after">2024</option>
+        </optgroup>
+        <optgroup label="Change">
+          <option value="change">new snow</option>
+        </optgroup>
+      </select>
+    </div>
+    <dialog id="auth-dialog">
+      <form method="dialog" id="auth-form">
+        <label>Client id
+          <br>
+          <input type="text" name="id" autofocus>
+        </label>
+        <label>Client secret
+          <br>
+          <input type="password" name="secret">
+        </label>
+        <button type="submit">show map</button>
+      </form>
+    </dialog>    
+    <script type="module" src="./sentinel-hub.js"></script>
+  </body>
+</html>
